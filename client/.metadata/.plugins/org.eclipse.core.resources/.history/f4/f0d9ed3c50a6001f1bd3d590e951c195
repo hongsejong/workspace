@@ -1,0 +1,119 @@
+package edu.kh.network.model.service;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Pac {
+   public static void main(String[] args) {
+      game();
+   }
+   public static void game()  {
+      Scanner sc = new Scanner(System.in);
+
+      System.out.println("팩맨 게임");
+      String [][] show = new String[10][20];
+      int pX=0,pY=0;
+      show[pX][pY]="C";
+      int cookieCount=(int)(Math.random()*(4)+2);
+      int realCount=0;
+
+
+      for(int cooi=0; cooi<cookieCount; cooi++) {
+         int cgaro = (int)(Math.random()*10);
+         int csero = (int)(Math.random()*20);
+         if(show[cgaro][csero]==null) {
+            show[cgaro][csero]="O";
+            realCount++;
+         }else {
+            cooi--;
+         }
+      }
+      int randomCount=0;
+      while(true) {
+         for(int i=0; i<10; i++) {
+            for(int j=0; j<20;j++) {
+               if(show[i][j]==null) {
+                  show[i][j]="-";
+               }
+            }
+         }
+         for(int i=0; i<10; i++) {
+            for(int j=0; j<20;j++) {
+               System.out.print(show[i][j]);
+            }
+            System.out.println();
+         }
+         String [] random = {"a","w","s","d"};
+         System.out.println("왼쪽(a) , 위(w), 아래(s), 오른쪽(d) >>");
+         String move = sc.next();
+         sc.nextLine();
+         randomCount++;
+      
+      
+         if(randomCount%3==0) {
+            move=random[(int)(Math.random()*4)];
+         }
+         
+         try {
+            switch(move) {
+            case "a" :
+            if(show[pX][pY-1].equals("O")) {
+               System.out.println("쿠키 먹기 성공 남은 쿠키 :"+--realCount);
+               show[pX][pY-1]="C";
+               show[pX][pY]="-";
+               pY--;
+            }else {
+               show[pX][pY]="-"; 
+               pY--; 
+               break; //왼
+            }
+            break;
+            case "w" :
+            if(show[pX-1][pY].equals("O")) {
+               System.out.println("쿠키 먹기 성공 남은 쿠키 :"+--realCount);
+               show[pX-1][pY]="C";
+               show[pX][pY]="-";
+               pX--;
+            }else {
+
+               show[pX][pY]="-"; pX--;break; //위
+            }
+            break;
+            case "s" :
+            if(show[pX+1][pY].equals("O")) {
+               System.out.println("쿠키 먹기 성공 남은 쿠키 :"+--realCount);
+               show[pX+1][pY]="C";
+               show[pX][pY]="-";
+               pX++;
+            }else {
+               show[pX][pY]="-"; pX++;break; //아래
+            }
+            break;
+            case "d" :
+            if(show[pX][pY+1].equals("O")) {
+               System.out.println("쿠키 먹기 성공 남은 쿠키 :"+realCount--);
+               show[pX][pY+1]="C";
+               show[pX][pY]="-";
+               pY++;
+            }else {
+
+               show[pX][pY]="-"; pY++;break; //오른
+            }break;
+            default : System.out.println("재대로 입력"); randomCount--; break;
+            }
+         }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("배열 범위 초과");
+            randomCount--;
+            
+         }
+         
+         show[pX][pY]="C";
+         if(realCount==0) {
+            System.out.println("clear 모든 쿠키 먹음");
+            return;
+         }
+      }
+
+   }
+
+}

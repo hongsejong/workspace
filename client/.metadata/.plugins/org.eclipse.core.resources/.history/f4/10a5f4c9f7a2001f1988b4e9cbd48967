@@ -1,0 +1,8 @@
+package edu.kh.network.run;
+
+public class TCPClientRun {
+	public static void main(String[] args) {
+		System.out.println("test");
+	}
+
+}
