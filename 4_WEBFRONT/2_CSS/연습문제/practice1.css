@@ -1,0 +1,63 @@
+div{
+    /* border:1px solid black; */
+}
+.container{
+    content:"width=device-width, initial-scale=1.0"
+    
+}
+
+.first{
+ height: 60px;
+ float : right;
+ font-size: 15px;
+
+}
+
+.clear{
+   
+
+    /* 현재 요소부터 겹쳐지는 float 상태를 해제 
+        **clear의 방향성
+        -float는 left/right 나눠져 있는데
+        지정된 float 흐름과 같은 방향을 해제해야 겹침 문제가 해결됨
+    */
+    clear : both; /*left,right 모두 해제*/
+}
+
+.center{
+
+  margin-left: 40%;
+
+}
+.mcenter{
+    margin-left: 30%;
+}
+.fixed-area{
+    width: 100px;
+    /* align : 맞추다,정렬하다 */
+    text-align: center;
+    font-size: 10px;
+    position: fixed;
+    /* fixed 요소는 화면(뷰포트,브라우저)기준으로 배치됨
+       +다른 요소와 겹쳐질 수 있고,
+       별도로 화면을 차지하려고 하지 않음 */
+
+    bottom: 50px;
+    right:50px;
+ 
+}
+
+.fixed-area>a{
+    color: black;
+ 
+}
+.tab{
+    margin-right: 35px;
+    margin-left: 15px;
+
+}
+
+
+
+
+    
