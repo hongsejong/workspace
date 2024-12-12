@@ -30,7 +30,7 @@ div{
 
 }
 .mcenter{
-    margin-left: 30%;
+    margin:auto;
 }
 .fixed-area{
     width: 100px;

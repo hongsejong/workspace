@@ -1,0 +1,92 @@
+.flex-container{
+    height: 100vh; /*현재 화면의 75% 만큼의 비율*/
+    /* vh : Viewport Height (현재 화면 높이)
+       Viewport : 브라우저 또는 기기 화면
+    */
+    background-color: gray;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+div{
+    box-sizing: border-box;
+    /* content + padding + border 합으로 width/height 지정 */
+}
+
+
+.t{
+    width: 100%;
+    height: 10%;
+    background-color: red;
+    text-align: left;
+    display: inline-block;
+}
+.left{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.main{
+    width:100%;
+    height: 90%;
+    background-color: yellow;
+}
+
+
+.flex-container {
+    display: flex;
+}
+
+.t {
+    display: flex;
+}
+
+.right-align {
+    margin-left: auto;
+}
+
+
+.logo{
+    text-align:  center;
+    margin-top: 5%;
+    
+}
+
+.sc{
+    margin-left: 40%;
+    border-radius: 3px;
+    width: 30px;
+    height: 20px;
+}
+.b{
+    width: 100%;
+    height: 30%;
+    background-color: greenyellow;
+}
+.gsc ,.feel{
+    flex-wrap: wrap;
+    display: inline-block;
+    padding: 1px;
+    border: solid black;
+    text-align: center;
+}
+.gsc{
+    justify-content:center
+}
+.feel{
+    margin-left: 5%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pt{
+    text-align: center;
+}
+
+
+
+
+

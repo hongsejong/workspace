@@ -1,0 +1,24 @@
+#c{
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    /* content + padding + border 합으로 width/height 지정 */
+}
+
+
+#left{
+    display: flex;
+    display: inline-block;
+    
+}
+#right{
+    display: flex;
+    display: inline-block;
+    flex-wrap: wrap;
+    text-align: end;
+    
+}
+.i{
+    display: inline-block;
+    flex-wrap: wrap;
+}
