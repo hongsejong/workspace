@@ -202,3 +202,6 @@ concon{
     z-index: 10; /* 다른 요소 위로 표시 */
     background-color: #f6f5ef; /* 배경색 지정 */
 }
+.공지사항>p>a{
+    color: white;
+}
