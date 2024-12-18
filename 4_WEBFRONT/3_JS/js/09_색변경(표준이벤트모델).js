@@ -99,16 +99,11 @@ for(let item of boxColor){
 
 
 document.getElementById("btn1").addEventListener("click",function(){
-
     const input1 = document.getElementById("inputtd").value; // 
-    
     for(let item of box){
         item.style.transitionDuration = (input1 + 's');
-        
     }
- 
     document.getElementById("print1").innerText= input1;
-
 })
 
 document.getElementById("clearBtn").addEventListener("click",function(){
