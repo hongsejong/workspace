@@ -14,6 +14,13 @@
     margin-left: 158px;
     margin-top: 10px;
   }
+
+  .green{
+    color: green;
+  }
+  .red{
+    color: red;
+  }
    
 </style>
 <body>
@@ -23,13 +30,13 @@
             <table>
                 <tr>
                     <td>아이디</td>
-                    <td><input type="text" id="inputId"></td>
+                    <td><input type="text" id="inputId" name="id"></td>
                     <td><button>중복확인</button></td>
                 </tr>
                 <tr>
                     <td>비밀번호</td>
-                    <td><input type="password" id="inputPw"></td>
-                    <td><span>비밀번호 일치</span></td>
+                    <td><input type="password" id="inputPw" name="pw"></td>
+                    <td><span id="passch"></span></td>
                 </tr>
                 <tr>
                     <td>비밀번호 확인</td>
@@ -39,27 +46,27 @@
                 </tr>
                 <tr>
                     <td>이름</td>
-                    <td><input type="text"></td>
-                    <td>한글만 입력하세요</td>
+                    <td><input type="text" id="name"></td>
+                    <td id="nametext"></td>
                 </tr>
                 <tr>
                     <td>성별</td>
-                    <td>남<input type="radio" name="gender">여<input type="radio" name="gender"></td>
+                    <td>남<input type="radio" name="gender" value="남" >여<input type="radio" name="gender" value="여" ></td>
                     
                 </tr>
                 <tr>
                     <td>전화번호</td>
-                    <td><input type="tel"></td>
+                    <td><input type="tel" id="tel" name="tel"></td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td><input type="email"></td>
+                    <td><input type="email" name="email"></td>
                 </tr>
                 <tr id="button">
                 </tr>
             </table>
-            <button class="button" id="초기화">초기화</button>
-            <button class="button">회원가입</button>
+            <button class="button" id="reset" type="reset" >초기화</button>
+            <button class="button" id="login">회원가입</button>
             
             
         </fieldset>
