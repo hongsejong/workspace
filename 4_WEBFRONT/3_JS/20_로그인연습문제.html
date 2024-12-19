@@ -55,15 +55,30 @@
     </div>
     <script>
          // 1. 이 문서를 처음 로드하면 로그인 화면은 보이지 않는다.
-        document.getElementById("myForm").style.display="none"
+        const myForm=document.getElementById("myForm")
+        myForm.style.display="none"
 
         // 2. label 태그는 가로로 '80px' 크기를 갖는다.
 
+        const labelTag=document.getElementsByTagName("label")
+        for(let tag of labelTag){
+            tag.style.display="inline-block";
+            tag.style.width="80px";
+        }
+
+
         // 3. 로그인 버튼을 클릭하면 로그인 화면이 화면에 나타난다.
-        const open =document.getElementsByClassName("open")
-        console.log(open[1])
+        const open =document.getElementsByClassName("open")[0].addEventListener("click",function(){
+
+            myForm.style.display="block"
+        })
+    
 
         // 4. Close 버튼을 클릭하면 로그인 화면이 사라진다.
+        document.getElementsByClassName("cancel")[0].addEventListener("click",function(){
+            myForm.style.display="none"
+        })
+
     </script>
 </body>
 </html>
