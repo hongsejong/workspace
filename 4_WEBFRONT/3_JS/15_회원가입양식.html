@@ -10,7 +10,7 @@
         /* border: 1px solid black; */
     }
   
-  #초기화{
+  #reset{
     margin-left: 158px;
     margin-top: 10px;
   }
@@ -20,6 +20,9 @@
   }
   .red{
     color: red;
+  }
+  .btn-area{
+    text-align: right;
   }
    
 </style>
@@ -77,3 +80,77 @@
     <script src="js/15_회원가입양식.js"></script>
 </body>
 </html>
+<!-- 
+<form action="main.html" onsubmit="return validate()">
+        <fieldset>
+            <legend>회원 가입 양식</legend>
+
+            <table>
+                <tr>
+                    <td>아이디</td>
+                    <td>
+                        <input type="text" id="inputId">
+                    </td>
+                    <td>
+                        <button type="button">중복확인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td>
+                        <input type="password" id="inputPw">
+                    </td>
+                    <td>
+                        <span id="pwMessage"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>비밀번호확인</td>
+                    <td>
+                        <input type="password" id="inputPwConfirm">
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td>
+                        <input type="text" id="inputName">
+                    </td>
+                    <td>
+                        <span id="nameMessage"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>성별</td>
+                    <td>
+                        <label> 남 <input type="radio" name="gender" value="m"></label> 
+                        <label> 여 <input type="radio" name="gender" value="f"></label> 
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td>
+                        <input type="text" id="inputTel">
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td>
+                        <input type="text" id="inputEmail">
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="btn-area">
+                        <button type="reset">초기화</button>
+                        <button>회원가입</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+
+    </form> -->
