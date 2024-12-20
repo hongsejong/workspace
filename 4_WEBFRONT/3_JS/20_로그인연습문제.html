@@ -56,7 +56,8 @@
     <script>
          // 1. 이 문서를 처음 로드하면 로그인 화면은 보이지 않는다.
         const myForm=document.getElementById("myForm")
-        myForm.style.display="none"
+        myForm.style.display="none"  // =>요소는 존재하지만 보이지X, 영역차지 X
+        // myForm.style.visibility="hidden" //=> 요소는 존재하지만 보이지X ,영역차지O
 
         // 2. label 태그는 가로로 '80px' 크기를 갖는다.
 
