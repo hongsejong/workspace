@@ -4,7 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-  <link rel="stylesheet" href="화면만들기.css">
+    <style>
+        body { height: 100vh; 
+    }
+        header{
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            height: 4%;
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+        }
+        header>div{
+        margin-right: 6px;
+        font-size: 13px;
+        color: #666;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 10;
+        }
+        nav>#left{
+            margin-left: 6px;
+            margin-right: 6px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 200px;
+            
+        }
+        #left:hover{
+            cursor: pointer;
+            color: #00A5B9;
+            
+        }
+        #btn-signup {
+       color: #fff;
+         padding: 0 18px;
+        height: 40px;
+       border: 1px solid #00A5B9;
+       border-radius: 22px;
+       background-color: #00A5B9;
+       box-shadow: 0 5px 10px rgba(0, 165, 185, 0.3);
+
+       
+    }   
+    .navright{
+        display: flex;
+        align-items: center;
+        margin-right: 10px ;
+    }
+    #navright{
+        margin-left: 350px;  /* 수정필요*/
+    }
+    
+  
+    section{
+        display: flex;
+            padding: 10px;
+            height: 200vh;
+            justify-content: center;
+    }
+    footer{
+        /* display: flex; */
+            padding: 10px;
+            height: 25%;
+            background-color: #999999;
+            /* opacity: 0.1; */
+    }
+    #배너{
+        width: 100%;
+    }
+    .가맹버튼{
+        background-color: #EFF1F3;
+        border: 1px solid #DDE0E3;
+    }
+
+   
+ 
+@font-face {
+    font-family: 'Gyeonggi_Batang_Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+/* @font-face 이용 */
+
+.font{
+    font-family: 'Gyeonggi_Batang_Regular';
+}
+#주소사진{
+    height: 15px;
+}
+#주소를설정{
+    padding: 5px;
+}
+ 
+.방식{
+    padding: 10px;
+    border-radius: 50px;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    margin-bottom: 10px;
+    border: 1px solid #00A5B9;
+       border-radius: 22px;
+       background-color: #00A5B9;
+       box-shadow: 0 5px 10px rgba(0, 165, 185, 0.3);
+}
+.방식:hover{
+    cursor: pointer;
+}
+
+input[type='radio'] {
+  display: none;
+}
+input[type='radio']:checked +label {
+    color: red;
+
+
+    
+}
+#롯데리아로고{
+    display: flex;
+    width: 25%;
+}
+#로고모음{
+    display: flex;
+    margin: 10px;
+}
+#로고모음 > img{
+    display: flex;
+    margin: 10px;
+}
+#sticky{
+    position: sticky;
+    top: 20%;
+    left: 7%;
+}
+#kakao{
+    position: fixed;
+    left: 90%;
+    bottom: 15%;
+}
+.가맹버튼{
+    width: 13%;
+    
+}
+
+a:link { color:white;
+    text-decoration: none;
+ }
+
+a:visited { color:white; 
+    text-decoration: none;}
+
+a:hover { color:black;
+        text-decoration: none; 
+    }
+#mypage:hover{
+    cursor: pointer;
+ 
+}
+#mypagetext{
+    display: none;
+    position: absolute;
+    top:100%;
+    left:0;
+    border: 1px solid black;
+    background-color: red;
+    z-index: 10;
+    width: 200px;
+    padding: 10px;
+    
+}
+#mypagetext>div{
+    border: 1px solid black;
+}
+.texttext {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+   
+  
+    </style>
 </head>
 <body>
     <header>
@@ -22,8 +218,8 @@
         <div class="navright" >
 
             <div id="navright" class="navright"><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_cart.svg"></div>
-            <div class="navright"><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_my.svg"></div>
-            <div class="navright"><button id="btn-signup"><a href="회원가입화면.html">로그인 / 회원가입</a></button></div>
+            <div class="navright" id="mypage"><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_my.svg"></div>
+            <div class="navright"><button id="btn-signup"><a href="화면만들기.html">로그아웃</a></button></div>
         </div>
     </nav>
 
@@ -35,10 +231,11 @@
             <div><img id="배너" src="https://img.lotteeatz.com/upload/pc/2024/11/14/20241114151014126_3.jpg"></div>
             <div style= >
             <img  id="주소사진"src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_location.svg">
-            <div id="주소를설정" class="font" style="font-size: 10px; font-weight: bold; display: inline-block;">주소를 설정해주세요!</div><br>
+            <div id="주소를설정" class="font" style="font-size: 20px; font-weight: bold; display: inline-block; cursor: pointer;">주소를 설정해주세요!</div><br>
+            
             <input type="radio" name="방식" value="배달" id="방식1">
             <label for="방식1"><div class="방식">배달</div></label>
-            <input type="radio" name="방식" value="배달" id="방식2">
+            <input type="radio" name="방식" value="포장" id="방식2">
             <label for="방식2"><div class="방식">포장</div></label>
               
             </div>
@@ -62,7 +259,7 @@
         </div>
         <div class="sectionDiv" id="sticky" style="width:20%; margin-left: 30px; border-left: 1px solid gray;">
            <p style="font-size: 24px; font-weight: bold; margin-left: 15px;" >
-            고객님,
+            user01 고객님,
         </p>
         <span style="font-size: 24px; font-weight: bold; margin-left: 15px;">오늘도 </span><span style="font-size: 24px; font-weight: bold; color: #00A5B9; ">EATZ</span>하세요!
         <p style="margin-left: 15px;" >
@@ -77,7 +274,13 @@
             
            </div>
             </div>
-            
+            <div id="mpagetext" style="display: none;">
+                <div class="texttext"> 내 정보 확인</div>
+                <div class="texttext"> 비밀번호 변경</div>
+                <div class="texttext"> 알림 설정</div>
+                <div class="texttext"> 고객 센터</div>
+                <div class="texttext"> 회원 탈퇴</div>
+                </div>
 
         <div id="kakao">
             <img style="width: 80px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRvGHm%2Fbtq0c3b6Thg%2F7CI0zUHJcapuNgqLP1K5xK%2Fimg.png" alt="">
@@ -140,6 +343,6 @@
     </footer>
 
 
-    <script src="화면만들기.js"></script>
+    <script src="로그인화면.js"></script>
 </body>
 </html>
