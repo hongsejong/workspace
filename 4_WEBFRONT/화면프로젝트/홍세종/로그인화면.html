@@ -130,7 +130,7 @@ input[type='radio']:checked +label {
 
     
 }
-#롯데리아로고{
+/* #롯데리아로고{
     display: flex;
     width: 25%;
 }
@@ -141,7 +141,7 @@ input[type='radio']:checked +label {
 #로고모음 > img{
     display: flex;
     margin: 10px;
-}
+} */
 #sticky{
     position: sticky;
     top: 20%;
@@ -195,7 +195,113 @@ a:hover { color:black;
     border-bottom: 1px solid #ddd;
     transition: background-color 0.3s, color 0.3s;
 }
+/* 전체 캐러셀 */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    overflow: hidden;
+}
 
+/* 이미지 슬라이드 */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%; /* 각 슬라이드는 100% 너비를 차지 */
+    box-sizing: border-box;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+}
+
+/* 이전, 다음 버튼 */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+/* 인디케이터(슬라이드 선택 버튼) */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.carousel-indicators button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel-indicators .active {
+    background-color: #00A5B9;
+}
+
+@-webkit-keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+      transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+      transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+      transform: scale(1) rotateZ(360deg);
+    }
+  }
+  @keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+      transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+      transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+      transform: scale(1) rotateZ(360deg);
+    }
+  }
+
+  #쿠폰:hover {
+    width: 100px;  
+    animation: rotate-scale-up 0.5s forwards;  
+  }
+  #어쩌구:hover {
+    animation: rotate-scale-up 0.5s forwards; 
+  }
 
 
    
@@ -240,14 +346,33 @@ a:hover { color:black;
               
             </div>
 
-            <div id="로고모음">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_lotteria.png">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_angelinus.png">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_krispy.png">
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img id="롯데리아로고" style="border-radius: 100px;"  src="https://img.lotteeatz.com/assets/images/main/img_store_lotteria.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="커피로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_angelinus.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="도넛로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_krispy.png" alt="Third slide">
+                    </div>
+                </div>
+        
+              <!-- 이전, 다음 버튼 -->
+<button class="carousel-control-prev">&#10094;</button>
+<button class="carousel-control-next">&#10095;</button>
+
+                <!-- 슬라이드 선택 인디케이터 -->
+                <div class="carousel-indicators">
+                    <button onclick="goToSlide(0)" class="active"></button>
+                    <button onclick="goToSlide(1)"></button>
+                    <button onclick="goToSlide(2)"></button>
+                </div>
             </div>
 
-            <img style="width: 100%;"  src="쿠폰어쩌구.png">
-            <img style="width: 100%;"  src="바로받는쿠폰.png">
+            <img id= "어쩌구"style="width: 100%;"  src="쿠폰어쩌구.png">
+            <img id="쿠폰"style="width: 100%;"  src="바로받는쿠폰.png">
             <img style="width: 100%;"  src="흐린날씨.png">
 
 
@@ -257,7 +382,7 @@ a:hover { color:black;
     </div>
           
         </div>
-        <div class="sectionDiv" id="sticky" style="width:20%; margin-left: 30px; border-left: 1px solid gray;">
+        <div class="sectionDiv" id="sticky" style=" width:20%; margin-left: 30px; border-left: 1px solid gray;">
            <p style="font-size: 24px; font-weight: bold; margin-left: 15px;" >
             user01 고객님,
         </p>
@@ -275,7 +400,7 @@ a:hover { color:black;
            </div>
             </div>
             <div id="mpagetext" style="display: none;">
-                <div class="texttext"> 내 정보 확인</div>
+                <div class="texttext" > 내 정보 확인</div>
                 <div class="texttext"> 비밀번호 변경</div>
                 <div class="texttext"> 알림 설정</div>
                 <div class="texttext"> 고객 센터</div>
@@ -343,6 +468,6 @@ a:hover { color:black;
     </footer>
 
 
-    <script src="로그인화면.js"></script>
+    <script src="로그인화면.js?version=1.0"></script>
 </body>
 </html>

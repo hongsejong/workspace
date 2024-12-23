@@ -123,18 +123,18 @@ color: red;
 
 
 }
-#롯데리아로고{
+/* #롯데리아로고{
 display: flex;
 width: 25%;
-}
-#로고모음{
+} */
+ #로고모음{
 display: flex;
 margin: 10px;
 }
 #로고모음 > img{
 display: flex;
 margin: 10px;
-}
+} 
 #sticky{
 position: sticky;
 top: 20%;
@@ -162,6 +162,110 @@ a:hover { color:black;
 }
 
 
+/* 전체 캐러셀 */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    overflow: hidden;
+}
 
+/* 이미지 슬라이드 */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
 
+.carousel-item {
+    min-width: 100%; /* 각 슬라이드는 100% 너비를 차지 */
+    box-sizing: border-box;
+}
 
+.carousel img {
+    width: 100%;
+    height: auto;
+}
+
+/* 이전, 다음 버튼 */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
+/* 인디케이터(슬라이드 선택 버튼) */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.carousel-indicators button {
+    background-color: black;
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel-indicators .active {
+    background-color: #00A5B9;
+}
+
+@-webkit-keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+      transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+      transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+      transform: scale(1) rotateZ(360deg);
+    }
+  }
+  @keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+      transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+      transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+      transform: scale(1) rotateZ(360deg);
+    }
+  }
+
+  #쿠폰:hover {
+    width: 100px;  
+    animation: rotate-scale-up 0.5s forwards;  
+  }
+  #어쩌구:hover {
+    animation: rotate-scale-up 0.5s forwards; 
+  }

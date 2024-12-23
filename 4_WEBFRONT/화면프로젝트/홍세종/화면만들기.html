@@ -43,14 +43,33 @@
               
             </div>
 
-            <div id="로고모음">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_lotteria.png">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_angelinus.png">
-                <img id="롯데리아로고" src="https://img.lotteeatz.com/assets/images/main/img_store_krispy.png">
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img id="롯데리아로고" style="border-radius: 100px;"  src="https://img.lotteeatz.com/assets/images/main/img_store_lotteria.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="커피로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_angelinus.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="도넛로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_krispy.png" alt="Third slide">
+                    </div>
+                </div>
+        
+              <!-- 이전, 다음 버튼 -->
+<button class="carousel-control-prev">&#10094;</button>
+<button class="carousel-control-next">&#10095;</button>
+
+                <!-- 슬라이드 선택 인디케이터 -->
+                <div class="carousel-indicators">
+                    <button onclick="goToSlide(0)" class="active"></button>
+                    <button onclick="goToSlide(1)"></button>
+                    <button onclick="goToSlide(2)"></button>
+                </div>
             </div>
 
-            <img style="width: 100%;"  src="쿠폰어쩌구.png">
-            <img style="width: 100%;"  src="바로받는쿠폰.png">
+            <img id="어쩌구"style="width: 100%;"  src="쿠폰어쩌구.png">
+            <img id="쿠폰" style="width: 100%;"  src="바로받는쿠폰.png">
             <img style="width: 100%;"  src="흐린날씨.png">
 
 
@@ -140,6 +159,6 @@
     </footer>
 
 
-    <script src="화면만들기.js"></script>
+    <script src="화면만들기.js?version=1.0"></script>
 </body>
 </html>
