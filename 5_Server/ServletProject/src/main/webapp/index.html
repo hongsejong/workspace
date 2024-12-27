@@ -83,6 +83,53 @@
         <button>주문서 제출하기</button>
     
     </form>
+    
+    <hr>
+    
+     <pre>
+        
+        요청 주소(action) : /ServletProject/example3.do
+
+        데이터 전달 방식(method) : GET 
+
+        * 비밀번호가 일치하지 않으면
+          응답화면에 h1태그로 "비밀번호가 일치하지 않습니다";
+
+          일치하면 가입된 회원 정보 출력
+
+        * 좋아하는 색을 체크하지 않으면 "없습니다" 출력
+
+        (참고) 
+        - 서버로 제출된 input 태그 값은 모두 [String] 입니다.
+
+        - input type="password" 는 화면에서만 안보이지 
+          서버로 제출된 경우 입력된 값이 그대로 보입니다.
+    </pre>
+
+    <form action="/ServletProject/example3.do" method="GET">
+
+        아이디 : <input type="text" name="inputId"> <br>
+        비밀번호 : <input type="password" name="inputPw1"> <br>
+        비밀번호 확인 : <input type="password" name="inputPw2"> <br>
+        
+        이름 : <input type="text" name="inputName"> <br>
+        이메일 : <input type="email" name="inputEmail"> <br>
+
+        좋아하는 색<br>
+        <label><input type="checkbox" name="color" value="빨강">빨강</label>
+        <label><input type="checkbox" name="color" value="노랑">노랑</label>
+        <label><input type="checkbox" name="color" value="초록">초록</label>
+        <br>
+        <label><input type="checkbox" name="color" value="파랑">파랑</label>
+        <label><input type="checkbox" name="color" value="분홍">분홍</label>
+        <label><input type="checkbox" name="color" value="검정">검정</label>
+
+        <br>
+
+        <button>회원 정보 제출하기</button>
+        
+	</form>
+    
 
 </body>
 </html>
