@@ -11,3 +11,5 @@ bin/
 *.tar.gz
 *.rar
 *.log
+# Servers 폴더
+Servers/
