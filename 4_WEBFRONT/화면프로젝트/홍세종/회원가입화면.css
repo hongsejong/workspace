@@ -1,0 +1,187 @@
+body { height: 100vh; 
+}
+    header{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        height: 4%;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    header>div{
+    margin-right: 6px;
+    font-size: 13px;
+    color: #666;
+    }
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+    }
+    nav>#left{
+        margin-left: 6px;
+        margin-right: 6px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 200px;
+        
+    }
+    #left:hover{
+        cursor: pointer;
+        color: #00A5B9;
+        
+    }
+    #btn-signup {
+   color: #fff;
+     padding: 0 18px;
+    height: 40px;
+   border: 1px solid #00A5B9;
+   border-radius: 22px;
+   background-color: #00A5B9;
+   box-shadow: 0 5px 10px rgba(0, 165, 185, 0.3);
+
+   
+}   
+.navright{
+    display: flex;
+    align-items: center;
+    margin-right: 10px ;
+}
+#navright{
+    margin-left: 350px;  /* 수정필요*/
+}
+
+
+section{
+    display: flex;
+        padding: 10px;
+        height: 55%;
+        justify-content: center;
+}
+footer{
+    /* display: flex; */
+        padding: 10px;
+        height: 25%;
+        background-color: #999999;
+        /* opacity: 0.1; */
+}
+#배너{
+    width: 100%;
+}
+.가맹버튼{
+    background-color: #EFF1F3;
+    border: 1px solid #DDE0E3;
+}
+
+
+
+@font-face {
+font-family: 'Gyeonggi_Batang_Regular';
+src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Regular.woff') format('woff');
+font-weight: 400;
+font-style: normal;
+}
+/* @font-face 이용 */
+
+.font{
+font-family: 'Gyeonggi_Batang_Regular';
+}
+#주소사진{
+height: 15px;
+}
+#주소를설정{
+padding: 5px;
+}
+
+.방식{
+border: 1px solid black;
+padding: 10px;
+border-radius: 50px;
+text-align: center;
+margin: auto;
+width: 50%;
+}
+.방식:hover{
+cursor: pointer;
+}
+
+
+
+
+
+#롯데리아로고{
+display: flex;
+width: 25%;
+}
+#로고모음{
+display: flex;
+margin: 10px;
+}
+#로고모음 > img{
+display: flex;
+margin: 10px;
+}
+#sticky{
+position: sticky;
+top: -0;
+}
+#kakao{
+position: fixed;
+left: 90%;
+bottom: 15%;
+}
+.가맹버튼{
+width: 13%;
+
+}
+
+input[type="text"]{
+width: 150px;
+margin-left: 64px;
+
+}
+input[type="password"]{
+width: 150px;
+margin-left: 10px;
+}
+#nameinput{
+margin-left: 80px;
+}
+#passinput{
+margin-left: 48px;
+}
+fieldset{
+padding: 10px;
+border-radius: 50px;
+text-align: center;
+margin: auto;
+margin-bottom: 10px;
+border: 1px solid #00A5B9;
+   border-radius: 22px;
+   background-color: #00A5B9;
+   box-shadow: 0 5px 10px rgba(0, 165, 185, 0.3);
+   margin-left: -100px;
+   margin-right: -50px;
+   margin-top: 50px;
+}
+fieldset>button , input{
+border-radius: 22px;
+}
+a:link { color:white;
+    text-decoration: none;
+    }
+    
+    a:visited { color:white; 
+    text-decoration: none;}
+    
+    a:hover { color:black;
+        text-decoration: none; 
+    }
+    
+    
+

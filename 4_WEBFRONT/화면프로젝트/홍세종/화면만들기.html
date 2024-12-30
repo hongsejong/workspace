@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <link rel="stylesheet" href="화면만들기.css">
+</head>
+<body>
+    <header>
+        <div>로그인/회원가입</div>
+        <div>주문/예약 내역</div>
+        <div>매장 찾기</div>
+    </header>
+    <nav>
+        <div><a href=""><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_header_logo.svg"></a></div>
+        <div style="width: 40px;"></div>
+        <div id="left">브랜드</div>
+        <div id="left">이벤트</div>
+        <div id="left">스토어</div>
+        <div id="left">고객지원</div>
+        <div class="navright" >
+
+            <div id="navright" class="navright"><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_cart.svg"></div>
+            <div class="navright"><img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_my.svg"></div>
+            <div class="navright"><button id="btn-signup"><a href="회원가입화면.html">로그인 / 회원가입</a></button></div>
+        </div>
+    </nav>
+
+    <section>
+      
+        <div class="sectionDiv" style="width: 50%; ">
+            
+            
+            <div><img id="배너" src="https://img.lotteeatz.com/upload/pc/2024/11/14/20241114151014126_3.jpg"></div>
+            <div style= >
+            <img  id="주소사진"src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_location.svg">
+            <div id="주소를설정" class="font" style="font-size: 10px; font-weight: bold; display: inline-block;">주소를 설정해주세요!</div><br>
+            <input type="radio" name="방식" value="배달" id="방식1">
+            <label for="방식1"><div class="방식">배달</div></label>
+            <input type="radio" name="방식" value="배달" id="방식2">
+            <label for="방식2"><div class="방식">포장</div></label>
+              
+            </div>
+
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img id="롯데리아로고" style="border-radius: 100px;"  src="https://img.lotteeatz.com/assets/images/main/img_store_lotteria.png" alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="커피로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_angelinus.png" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img id="도넛로고" style="border-radius: 100px;" src="https://img.lotteeatz.com/assets/images/main/img_store_krispy.png" alt="Third slide">
+                    </div>
+                </div>
+        
+              <!-- 이전, 다음 버튼 -->
+<button class="carousel-control-prev">&#10094;</button>
+<button class="carousel-control-next">&#10095;</button>
+
+                <!-- 슬라이드 선택 인디케이터 -->
+                <div class="carousel-indicators">
+                    <button onclick="goToSlide(0)" class="active"></button>
+                    <button onclick="goToSlide(1)"></button>
+                    <button onclick="goToSlide(2)"></button>
+                </div>
+            </div>
+
+            <img id="어쩌구"style="width: 100%;"  src="쿠폰어쩌구.png">
+            <img id="쿠폰" style="width: 100%;"  src="바로받는쿠폰.png">
+            <img style="width: 100%;"  src="흐린날씨.png">
+
+
+
+        </div>
+        
+    </div>
+          
+        </div>
+        <div class="sectionDiv" id="sticky" style="width:20%; margin-left: 30px; border-left: 1px solid gray;">
+           <p style="font-size: 24px; font-weight: bold; margin-left: 15px;" >
+            고객님,
+        </p>
+        <span style="font-size: 24px; font-weight: bold; margin-left: 15px;">오늘도 </span><span style="font-size: 24px; font-weight: bold; color: #00A5B9; ">EATZ</span>하세요!
+        <p style="margin-left: 15px;" >
+        EATZ마일을 확인해 보세요.
+           </p>
+           <div>
+            <img src="롯데리아.png" alt="">
+            <img src="엔제리너스.png" alt="">
+            <img src="크리스피크림도넛.png" alt="">
+            <div style="font-weight: bold; padding: 20px;margin-left: 15px;" >브랜드 바로가기</div>
+            <img src="브랜드바로가기.png" alt="">
+            
+           </div>
+            </div>
+            
+
+        <div id="kakao">
+            <img style="width: 80px;" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FRvGHm%2Fbtq0c3b6Thg%2F7CI0zUHJcapuNgqLP1K5xK%2Fimg.png" alt="">
+        </div>
+
+    </section>
+
+
+    <footer style="font-size: 12px;">
+
+        <span style="font-weight: bold;">개인정보처리방침</span>
+        <span style=> | </span>
+        <span style=> 이용약관 </span>
+        <span style=> | </span>
+        <span style=> 위치기반서비스 이용약관 </span>
+        <span style=> | </span>
+        <span style=> 영상정보 처리기기 운영 및 관리방침 </span>
+        <span style=> |</span>
+        <span style=> 공지사항 </span>
+        <span style=> | </span>
+        <span style=> 창업상담 </span>
+        <span style=> | </span>
+        <span style=> 설정</span>
+
+        <div style=" height: 20%;">
+           <span style="font-weight: bold;">가맹점 모집</span>
+           <button class="가맹버튼">롯데리아</button>
+           <button class="가맹버튼">엔제리너스</button>
+           <button class="가맹버튼">크리스피크림 도넛</button>
+           <button class="가맹버튼">창업설명회 신청</button>
+        </div>
+        <br>
+        <div>
+            <span style="font-weight: bold;">롯데GRS 사업자정보</span>
+            <span>
+                대표자 : 차우철 주소 : 서울시 송파구 백제고분로 217 LOTTE GRS 79 SQUARE 사업자번호 : 106-81-23498
+            </span>
+            <div>
+                <span style="margin-left: 235px;">통신판매번호 : 용산 06463 사업자정보확인</span>
+            </div>
+            <div>
+                <span style="font-weight: bold; " >문의처</span>
+                <span>본사 고객의 소리 운영시간: 평일 9시~18시 유선상담 매장이용 불편사항 080-550-0005 (평일 9시-18시) 일반문의 02-709-1114 (평일 9시-18시)</span>
+                <span>모바일 쿠폰 오류, 환불 등 문의 사항은 구입처에서만 유선 상담 가능합니다. LOTTE EATZ앱 문의: 1600-0552 (평일 9시-18시)</span>
+                <span>일반 쿠폰(기프티엘): 1644-4276 (평일 9시30분-18시)</span>
+            </div>
+                
+        </div>
+        <span>copyright © 2023 Lotte GRS co.,ltd all right reserved</span>
+
+        <span>
+            <img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_sns_facebook.svg" alt="">
+            <img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_sns_instagram.svg" alt="">
+            <img src="https://stat.lotteeatz.com/202412181818/assets/images/common/comm_ico_sns_twitter.svg">
+        </span>
+
+
+
+        
+    </footer>
+
+
+    <script src="화면만들기.js?version=1.0"></script>
+</body>
+</html>
