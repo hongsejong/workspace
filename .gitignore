@@ -13,3 +13,5 @@ bin/
 *.log
 # Servers 폴더
 Servers/
+# 서버 webapp
+jspwork/
