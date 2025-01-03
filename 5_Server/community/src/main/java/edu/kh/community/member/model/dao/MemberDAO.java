@@ -69,5 +69,35 @@ public class MemberDAO {
 		}
 		return loginMember;
 	}
+	
+	
+	
+
+	public int signUp(Member mem, Connection conn) {
+	      int result = 0;
+	      
+	      try {
+	         pstmt = conn.prepareStatement(prop.getProperty("signUp"));
+	         pstmt.setString(1, mem.getMemberEmail());
+	         pstmt.setString(2, mem.getMemberPw());
+	         pstmt.setString(3, mem.getMemberNickname());
+	         pstmt.setString(4, mem.getMemberTel());
+	         pstmt.setString(5, mem.getMemberAddress());
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           close(pstmt);
+	           
+	        }
+	      
+	      
+	      return result;
+	   }
+
+	
+	
 
 }

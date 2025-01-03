@@ -27,5 +27,26 @@ public class MemberService {
 		//결과 반환
 		return loginMember;
 	}
+	
+	
+	/**
+	    * @param mem
+	    * @return result
+	    * @throws Exception
+	    */
+	//회원가입 서비스
+	   public int signUp(Member mem) throws Exception {
+	      
+	      Connection conn = getConnection();
+	      
+	      int result = dao.signUp(mem, conn);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	      
+	   }
 
 }
