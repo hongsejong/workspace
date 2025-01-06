@@ -21,4 +21,15 @@
       INSERT INTO "MEMBER"
       VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?, ?, ?, NULL, DEFAULT, DEFAULT)
    </entry>
+   
+   
+   <!-- 내 정보 수정 -->
+   <entry key="update">
+   UPDATE MEMBER SET 
+    MEMBER_NICK = ?,
+    MEMBER_TEL = ?, 
+    MEMBER_ADDR = ?
+	WHERE MEMBER_NO = ?
+   
+   </entry>
 </properties>

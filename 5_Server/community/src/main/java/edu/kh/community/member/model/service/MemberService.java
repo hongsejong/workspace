@@ -49,4 +49,22 @@ public class MemberService {
 	      
 	   }
 
+
+	/** 내정보수정
+	 * @param mem
+	 * @return
+	 * @throws Exception
+	 */
+	public int update(Member mem) throws Exception{
+		Connection conn = getConnection();
+	      
+	      int result = dao.update(mem, conn);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
 }
