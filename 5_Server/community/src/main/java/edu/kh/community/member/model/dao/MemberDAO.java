@@ -129,6 +129,48 @@ public class MemberDAO {
 		      
 		      return result;
 	}
+
+
+	public int changePw(String currentPw, String newPw, int memberNo, Connection conn) throws Exception {
+		
+		   int result = 0;
+		      
+		      try {
+		         pstmt = conn.prepareStatement(prop.getProperty("changePw"));
+		         pstmt.setString(1, newPw);
+		         pstmt.setInt(2, memberNo);
+		         pstmt.setString(3, currentPw);
+		         
+		         result = pstmt.executeUpdate();
+		         
+		      } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		           close(pstmt);
+		        }
+		      
+		      return result;
+	}
+
+	
+	public int secession(Member mem ,Connection conn) {
+		  int result = 0;
+	      
+	      try {
+	         pstmt = conn.prepareStatement(prop.getProperty("secession"));
+	         pstmt.setInt(1, mem.getMemberNo());
+	         pstmt.setString(2, mem.getMemberPw());
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           close(pstmt);
+	        }
+	      
+	      return result;
+	}
 	
 	
 

@@ -34,7 +34,7 @@
             </ul>
         </nav>
 
-        <!-- 마이페이지 - 내정보 -->
+        <!-- 마이페이지 - 비밀번호 변경 -->
          <section class="myPage-content">
 
             <!-- 사이드 메뉴 include  -->
@@ -52,38 +52,27 @@
 
             <!-- 오른쪽 마이페이지 주요 내용 부분 -->
             <section class="myPage-main">
-                <h1 class="myPage-title">내 정보</h1>
-                <span class="myPage-explanation">원하는 회원 정보를 수정할 수 있습니다.</span>
+                <h1 class="myPage-title">비밀번호 변경</h1>
+                <span class="myPage-explanation">현재 비밀번호가 일치하는 경우 새 비밀번호로 변경할 수 있습니다.</span>
 
-                <form action="info" method="post" name="myPage-form" onsubmit="return infoValidate()">
+                <form action="changePw" method="post" name="myPage-form" onsubmit="return changePwValidate()">
                     <div class="myPage-row">
-                        <label for="memberNickname">닉네임</label>
-                        <input type="text" name="memberNickname" id="memberNickname" value="${loginMember.memberNickname}" maxlength="10">
-                    </div>
-
-                    <div class="myPage-row">
-                        <label for="memberTel">전화번호</label>
-                        <input type="text" name="memberTel" id="memberTel" value="${loginMember.memberTel}" maxlength="11">
-                    </div>
-                    <!-- 주소 -->       <!--fn:split(문자열,'구분자')-->
-                     <c:set var="addr" value="${fn:split(loginMember.memberAddress, ',,')}"/>
-
-                    <div class="myPage-row info-title">
-                        <span>주소</span>
-                    </div>
-
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[0]}" maxlength="6">
-                        <button type="button" id="info-address-btn">검색</button>
-                    </div>
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[1]}" >
-                    </div>
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[2]}">
+                        <label for="currentPw">현재 비밀번호</label>
+                        <input type="password" name="currentPw" id="currentPw"  maxlength="30">
                     </div>
                     
-                    <button id="info-update-btn"  >수정하기</button>
+                     <div class="myPage-row">
+                        <label for="newPw">새 비밀번호</label>
+                        <input type="password" name="newPw" id="newPw"  maxlength="30">
+                    </div>
+                      <div class="myPage-row">
+                        <label for="newPwConfirm">새 비밀번호 확인</label>
+                        <input type="password" name="newPwConfirm" id="newPwConfirm"  maxlength="30">
+                    </div>
+
+                   
+                    
+                    <button id="info-update-btn">수정하기</button>
 
                 </form>
 
@@ -95,9 +84,6 @@
    <!-- 푸터 -->
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
         <!-- 푸터끝 -->
-
-        <!-- main.js 연결 -->
-    <script src="${contextPath}/resources/js/myPage.js"></script>
-    
+        <script src="${contextPath}/resources/js/myPage.js"></script>
     </body>
     </html>

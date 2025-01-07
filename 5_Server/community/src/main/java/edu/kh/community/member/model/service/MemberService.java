@@ -67,4 +67,34 @@ public class MemberService {
 	      return result;
 	}
 
+
+
+
+
+	public int changePw(String currentPw, String newPw, int memberNo) throws Exception {
+		
+		Connection conn = getConnection();
+	      
+	      int result = dao.changePw(currentPw,newPw,memberNo,conn);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
+
+	public int secession(Member mem) {
+		Connection conn = getConnection();
+	      
+	      int result = dao.secession(mem, conn);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
 }

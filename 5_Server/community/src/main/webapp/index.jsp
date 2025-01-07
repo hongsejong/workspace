@@ -85,9 +85,7 @@
             <c:choose>
             	<%-- choose 내부에는 jsp 주석만 사용 가능!! --%>
             	<c:when test="${empty sessionScope.loginMember }">
-            	<form action="member/login" name="login-form" method="post">
-                
-                
+            	<form action="member/login" name="login-form" method="post" onsubmit="return loginValidate()">
                     <!-- 아이디/비밀번호/로그인버튼 영역 -->
                     <fieldset id="id-pw-area">
                         <section>													<%--현재 페이지 쿠키 중 "saveId"의 내용 출력 --%>
@@ -162,7 +160,7 @@
     </main>
     <!--footer-->
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-    
+    <!-- main.js 연결 -->
+    <script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>

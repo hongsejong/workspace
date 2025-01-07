@@ -17,12 +17,12 @@
     </head>
     <body>
 
-  
+
     <main>
         <!-- 헤더 -->
             <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-           <!-- 헤더끝 -->
-       
+            <!-- 헤더끝 -->
+        
 
         <nav>
             <ul>
@@ -34,11 +34,11 @@
             </ul>
         </nav>
 
-        <!-- 마이페이지 - 내정보 -->
-         <section class="myPage-content">
+        <!-- 마이페이지 - 비밀번호 변경 -->
+            <section class="myPage-content">
 
             <!-- 사이드 메뉴 include  -->
-             <jsp:include page="/WEB-INF/views/member/sideMenu.jsp"></jsp:include>
+                <jsp:include page="/WEB-INF/views/member/sideMenu.jsp"></jsp:include>
             <!-- 왼쪽 사이드 메뉴 -->
             <!-- <section class="left-side">
                 <ul class="list-group">
@@ -52,52 +52,64 @@
 
             <!-- 오른쪽 마이페이지 주요 내용 부분 -->
             <section class="myPage-main">
-                <h1 class="myPage-title">내 정보</h1>
-                <span class="myPage-explanation">원하는 회원 정보를 수정할 수 있습니다.</span>
+                <h1 class="myPage-title">회원 탈퇴</h1>
+                <span class="myPage-explanation">현재 비밀번호가 일치하는 경우 탈퇴할 수 있습니다.</span>
 
-                <form action="info" method="post" name="myPage-form" onsubmit="return infoValidate()">
+                <form action="secession" method="post" name="myPage-form" onsubmit="return secessionValidate()">
                     <div class="myPage-row">
-                        <label for="memberNickname">닉네임</label>
-                        <input type="text" name="memberNickname" id="memberNickname" value="${loginMember.memberNickname}" maxlength="10">
-                    </div>
-
-                    <div class="myPage-row">
-                        <label for="memberTel">전화번호</label>
-                        <input type="text" name="memberTel" id="memberTel" value="${loginMember.memberTel}" maxlength="11">
-                    </div>
-                    <!-- 주소 -->       <!--fn:split(문자열,'구분자')-->
-                     <c:set var="addr" value="${fn:split(loginMember.memberAddress, ',,')}"/>
-
-                    <div class="myPage-row info-title">
-                        <span>주소</span>
-                    </div>
-
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[0]}" maxlength="6">
-                        <button type="button" id="info-address-btn">검색</button>
-                    </div>
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[1]}" >
-                    </div>
-                    <div class="myPage-row info-address">
-                        <input type="text" name="memberAddress"  value="${addr[2]}">
+                        <label for="memberPw">현재 비밀번호</label>
+                        <input type="password" name="memberPw" id="memberPw"  maxlength="30">
                     </div>
                     
-                    <button id="info-update-btn"  >수정하기</button>
+                    <div class="myPage-row info-title">
+                        <label>회원 탈퇴 약관</label>
+                        
+                    </div>
+                    <pre id="secession-terms">
+제1조
+이 약관은 샘플 약관입니다.
+                    
+① 약관 내용 1
+                    
+② 약관 내용 2
+                    
+③ 약관 내용 3
+                    
+④ 약관 내용 4
+                    
+                    
+제2조
+이 약관은 샘플 약관입니다.
+                    
+① 약관 내용 1
+                    
+② 약관 내용 2
+
+③ 약관 내용 3
+                    
+④ 약관 내용 4
+                                        </pre>
+                    
+                                        <div>
+                                            <input type="checkbox" name="agree" id="agree">
+                                            <label for="agree">위 약관에 동의합니다.</label>
+                                        </div>
+                    
+                                        <button id="info-update-btn">탈퇴</button>
+
+                    
+                    
 
                 </form>
 
             </section>
-         </section>
+            </section>
 
         
     </main>
-   <!-- 푸터 -->
+    <!-- 푸터 -->
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
         <!-- 푸터끝 -->
-
-        <!-- main.js 연결 -->
-    <script src="${contextPath}/resources/js/myPage.js"></script>
-    
+        <script src="${contextPath}/resources/js/myPage.js"></script>
     </body>
     </html>

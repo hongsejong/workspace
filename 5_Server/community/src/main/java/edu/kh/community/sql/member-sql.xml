@@ -32,4 +32,20 @@
 	WHERE MEMBER_NO = ?
    
    </entry>
+   
+   <!-- 비밀번호 변경 -->
+      <entry key="changePw">
+UPDATE MEMBER 
+SET MEMBER_PW=?
+WHERE MEMBER_NO =?
+AND MEMBER_PW=?
+   
+   </entry>
+   
+   <entry key="secession">
+   UPDATE MEMBER 
+SET SECESSION_FL ='Y'
+WHERE MEMBER_NO =? AND MEMBER_PW=?
+   </entry>
+   
 </properties>
