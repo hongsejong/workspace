@@ -171,6 +171,60 @@ public class MemberDAO {
 	      
 	      return result;
 	}
+
+	public int emailDupCheck(String memberEmail, Connection conn) throws Exception {
+  int result = 0;
+	      
+	      try {
+	    	  String sql=prop.getProperty("emailDupCheck");
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, memberEmail);
+	         
+	         rs= pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	        	 result=rs.getInt(1); //번 컬럼의 결과를 result에 대입
+	         }
+	         
+	      } finally {
+	    	  
+	    	  close(rs);
+	           close(pstmt);
+	        }
+	      
+	      return result;
+	}
+
+	
+	
+	/**닉네임 중복검사
+	 * @param memberNickname
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int nicknameDupCheck(String memberNickname, Connection conn) throws Exception {
+  int result = 0;
+	      
+	      try {
+	    	  String sql=prop.getProperty("nicknameDupCheck");
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, memberNickname);
+	         
+	         rs= pstmt.executeQuery();
+	         
+	         if(rs.next()) {
+	        	 result=rs.getInt(1); //번 컬럼의 결과를 result에 대입
+	         }
+	         
+	      } finally {
+	    	  
+	    	  close(rs);
+	           close(pstmt);
+	        }
+	      
+	      return result;
+	}
 	
 	
 

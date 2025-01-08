@@ -47,5 +47,16 @@ AND MEMBER_PW=?
 SET SECESSION_FL ='Y'
 WHERE MEMBER_NO =? AND MEMBER_PW=?
    </entry>
+   <entry key="emailDupCheck">
+   SELECT COUNT(*) FROM MEMBER
+	WHERE MEMBER_EMAIL=?
+	AND SECESSION_FL = 'N'
+   </entry>
+   
+   <entry key="nicknameDupCheck">
+   SELECT COUNT(*) FROM MEMBER
+	WHERE MEMBER_NICK=?
+	AND SECESSION_FL = 'N'
+   </entry>
    
 </properties>

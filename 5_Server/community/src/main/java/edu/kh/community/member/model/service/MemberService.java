@@ -97,4 +97,26 @@ public class MemberService {
 	      return result;
 	}
 
+
+	public int emailDupCheck(String memberEmail) throws Exception{
+		Connection conn = getConnection();
+	      
+	      int result = dao.emailDupCheck(memberEmail, conn);
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
+
+	public int nicknameDupCheck(String memberNickname) throws Exception{
+		Connection conn = getConnection();
+	      
+	      int result = dao.nicknameDupCheck(memberNickname, conn);
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
 }
