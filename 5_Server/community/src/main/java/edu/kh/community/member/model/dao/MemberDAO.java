@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import static edu.kh.community.common.JDBCTemplate.*;
 
@@ -224,6 +226,98 @@ public class MemberDAO {
 	        }
 	      
 	      return result;
+	}
+
+	public Member selectOne(Member mem, Connection conn) throws Exception{
+		Member member = null;
+	      
+	      try {
+	    	 String sql=prop.getProperty("selectOne");
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, mem.getMemberEmail());
+	         
+	         rs= pstmt.executeQuery();
+	         
+				if(rs.next()) {
+					member=new Member();
+					member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+					member.setMemberNickname(rs.getString("MEMBER_NICK"));
+					member.setMemberTel(rs.getString("MEMBER_TEL"));
+					member.setMemberAddress(rs.getString("MEMBER_ADDR"));
+					member.setEnrollDate(rs.getString("ENROLL_DT"));
+				}
+	         
+	      } finally {
+	    	  
+	    	  close(rs);
+	           close(pstmt);
+	        }
+	      
+	      return member;
+	}
+
+	public Member selectAll(Member memberAll, Connection conn) throws Exception {
+		Member member = null;
+		Member members =null;
+	      
+	      try {
+	    	 String sql=prop.getProperty("selectAll");
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         rs= pstmt.executeQuery();
+	         
+				while(rs.next()) {
+					member=new Member();
+					member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+					member.setMemberNickname(rs.getString("MEMBER_NICK"));
+					member.setMemberTel(rs.getString("MEMBER_TEL"));
+					member.setMemberAddress(rs.getString("MEMBER_ADDR"));
+					member.setEnrollDate(rs.getString("ENROLL_DT"));
+					int count=1;
+				}
+	         
+	      } finally {
+	    	  
+	    	  close(rs);
+	           close(pstmt);
+	        }
+	      
+	      return member;
+	}
+
+	
+	
+	/**회원 목록 조회 ajax
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Member> selectAll(Connection conn) throws Exception {
+		
+		List<Member> memberList = new ArrayList<>(); //결과 저장용 변수
+	      
+	      try {
+	    	 String sql=prop.getProperty("selectAll");
+	    	 
+	    	 stmt=conn.createStatement();
+	         rs= stmt.executeQuery(sql);
+	         
+				while(rs.next()) {
+					Member member=new Member();
+					member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+					member.setMemberNickname(rs.getString("MEMBER_NICK"));
+					member.setMemberNo(rs.getInt("MEMBER_NO"));
+					
+					memberList.add(member); //리스트에 추가
+				}
+	         
+	      } finally {
+	    	  
+	    	  close(rs);
+	           close(pstmt);
+	        }
+	      
+	      return memberList;
 	}
 	
 	

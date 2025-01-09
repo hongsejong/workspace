@@ -10,39 +10,11 @@
 
     <link rel="stylesheet" href="resources/css/main-style.css">
     <script src="https://kit.fontawesome.com/0537c4177e.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <!-- 
-        시맨틱(Semantic, 의미) 태그 (의미있는 태그)
-
-        - 기존 영역 분할에 주로 사용되던 div, span 등의 태그는
-        태그 이름만 봤을 때 나눈다는 것 이외의 의미를 파악할 수 없음
-        -> 태그만 봤을 때 태그의 목적을 할 수 없어
-           id 또는 class를 반드시 추가해야 했다.
-
-        이런 문제점을 해결하고자
-        태그 이름만으로 어느정도 어떤 역할을 하는지 알 수 있고
-        추가적으로 웹 접근성 향상에 도움이 되는
-        시맨틱 태그가 추가됨 (HTML5)
-
-        [제공하는 태그]
-
-        header 태그 : 문서의 제목, 머리말 영역
-
-        footer 태그 : 문서의 하단부분, 꼬리말, 정보 작성 영역
-
-        nav 태그 : 나침반 역할(다른 페이지, 사이트 이동)의 링크 작성 영역
-
-        main 태그 : 현재 문서의 주된 콘텐츠 작성 영역
-
-        section 태그 : 구역 구문을 위한 영역
-
-        article(작은 토막) 태그 : 본문과 독립된 콘텐츠를 작성하는 영역
-
-        aside 태그 : 사이드바(보통 양쪽), 광고 영역
-
-     -->
+ 
     <main>
         <!--header-->
 
@@ -73,11 +45,57 @@
         
             <section class=content-1>
             
-            	loginMember : ${sessionScope.loginMember }
-            	
-            	<hr>
-            	
-            	message: ${sessionScope.message }
+                <h3>회원 정보 조회(ajax)</h3>
+                <p>이메일을 입력 받아 일치하는 회원 정보를 출력</p>
+
+                이메일 : <input type="text" id="inEmail">
+                <button id="selectBtn">조회</button>
+
+                <div id="result1">
+
+                </div>
+
+                <hr>
+
+                <h3>회원 목록 조회</h3>
+                <p>일정 시간마다 비동기로 회원 목록(회원 번호, 이메일,닉네임)조회</p>
+                
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>회원 번호</th>
+                            <th>이메일</th>
+                            <th>닉네임</th>
+                        </tr>
+
+                        <tbody id="memberList">
+                            <tr>
+                                <td>1</td>
+                                <td>user01@kh.or.kr</td>
+                                <td>유저일</td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td>user02@kh.or.kr</td>
+                                <td>유저이</td>
+                            </tr>
+                        </tbody>
+                    </thead>
+                </table>
+
+                <!-- 이메일이 일치하는 회원이 있을 경우 -->
+                <!-- <ul>
+                    <li>이메일 : user01@kh.or.kr</li>
+                    <li>닉네임 : 유저일</li>
+                    <li>전화번호 : 01012341234</li>
+                    <li>주소 : 서울시 강남구 테헤란로</li>
+                    <li>가입일 : 2025년 01월 09일</li>
+                </ul> -->
+
+                <!-- 일치하는 회원이 없을 경우 -->
+                 <!-- <h4 style="color: red;">일치하는 회원이 없습니다.</h4> -->
+
             </section>
             
             

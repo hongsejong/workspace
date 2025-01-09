@@ -1,6 +1,7 @@
 package edu.kh.community.member.model.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import static edu.kh.community.common.JDBCTemplate.*;
 import edu.kh.community.member.model.dao.MemberDAO;
@@ -118,5 +119,33 @@ public class MemberService {
 	      
 	      return result;
 	}
+
+
+	public Member selectOne(Member mem) throws Exception{
+		Connection conn = getConnection();
+	      
+	      Member member = dao.selectOne(mem, conn);
+	      
+	      close(conn);
+	      
+	      return member;
+	}
+
+
+
+
+
+	public List<Member> selectAll()  throws Exception{
+		Connection conn = getConnection();
+	      
+	      List<Member> memberList = dao.selectAll(conn);
+	      
+	      close(conn);
+	      
+	      return memberList;
+	}
+
+
+
 
 }
