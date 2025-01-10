@@ -24,15 +24,7 @@
            <!-- 헤더끝 -->
        
 
-        <nav>
-            <ul>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">자유 게시판</a></li>
-                <li><a href="#">질문 게시판</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">1:1문의</a></li>
-            </ul>
-        </nav>
+       
 
         <!-- 마이페이지 - 내정보 -->
          <section class="myPage-content">

@@ -50,15 +50,7 @@
         <!-- header -->
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-        <nav>
-            <ul>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">자유 게시판</a></li>
-                <li><a href="#">질문 게시판</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">1:1문의</a></li>
-            </ul>
-        </nav>
+   
 
         <!-- 회원 가입 -->
         <section class="signUp-content">
@@ -165,12 +157,6 @@
                 </div>
 
                 <button id="signUp-btn">가입하기</button>
-
-                
-
-
-
-                
 
             </form>
         

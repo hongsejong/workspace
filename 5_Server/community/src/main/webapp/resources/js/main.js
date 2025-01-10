@@ -87,14 +87,16 @@ document.getElementById("selectBtn").addEventListener("click",()=>{
                 const tr = document.createElement("tr");
 
                 // li 요소 생성 * 5 + 내용 추가
-                
                 const td1 = document.createElement("td");
+                const li1 =document.createElement("li");
                 li1.innerText=`이메일 : ${member.memberEmail}`; 
                 const td2 = document.createElement("td");
+                const li2 =document.createElement("li");
                 li2.innerText=`닉네임 : ${member.memberNickname}`; 
                 const td3 = document.createElement("td");
+                const li3 =document.createElement("li");
                 li3.innerText=`전화번호 : ${member.memberTel}`; 
-
+                
                 div.append(li1,li2,li3,li4,li5);
 
                 // div($result1)에 ul 추가
