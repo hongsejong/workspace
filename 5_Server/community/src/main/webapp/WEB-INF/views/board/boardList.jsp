@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
                                 <c:forEach var="board" items="${boardList}">
                                     <tr>
                                         <td>${board.boardNo}</td>
-                                        <td><a href="#">${board.boardTitle}</a></td>
+                                        <td><a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}">${board.boardTitle}</a></td>
                                         <td>${board.memberNickname}</td>
                                         <td>${board.createDate}</td>
                                         <td>${board.readCount}</td>
