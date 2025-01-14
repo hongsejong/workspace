@@ -13,6 +13,8 @@ pageEncoding="UTF-8"%>
     <title>게시판 목록</title>
     <link rel="stylesheet" href="../resources/css/boardDetail-style.css">
     <link rel="stylesheet" href="../resources/css/main-style.css">
+    <link rel="stylesheet" href="../resources/css/reply-style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
     <main>
@@ -119,10 +121,39 @@ pageEncoding="UTF-8"%>
                </div>
        </section>
 
-        
+        <!-- 댓글 -->
+        <jsp:include page="/WEB-INF/views/board/reply.jsp"/>
     </main>
    
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script src="${contextPath}/resources/js/board/board.js"></script>
+
+
+    <script>
+        // 댓글 관련 JS 코드에 필요한 값을 전역 변수로 선언
+
+        // jsp 파일 : html, css, js, el, jstl 사용 가능
+        // js  파일 : js
+
+        //코드 해석 순서 : EL == JSTL > HTML > JS
+
+        // * JS 코드에서 EL/JSTL을 작성하게 된다면 반드시 ""를 양쪽에 추가 *
+
+        // 최상위 주소
+        const contextPath= "${contextPath}";
+        console.log(contextPath);
+
+        //게시글 번호
+        const boardNo = "${detail.boardNo}";
+        console.log(boardNo)
+        //로그인한 회원 번호
+
+        const loginMemberNo = "${loginMember.memberNo}"
+        console.log(loginMemberNo);
+        //로그인 O : "10";
+        //로그인 X : ""; (빈문자열)
+    </script>
+
+    <script src="${contextPath}/resources/js/board/reply.js"></script>
 </body>
 </html>
