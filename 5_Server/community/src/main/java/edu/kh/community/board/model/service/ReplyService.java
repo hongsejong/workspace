@@ -67,6 +67,35 @@ public class ReplyService {
 		return result;
 	}
 
+	public int deleteReply(int replyNo) throws Exception {
+		int result=0;
+		Connection conn = getConnection();
+	      
+		 result = dao.deleteReply(conn,replyNo);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
+	public int updateReply(int replyNo, String updateContent)  throws Exception{
+		int result=0;
+		Connection conn = getConnection();
+		updateContent=Util.XSSHandling(updateContent); //common에 util있음
+	      
+		updateContent=Util.newLineHandling(updateContent);
+	      
+		 result = dao.updateReply(conn,replyNo,updateContent);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
 
 
 }

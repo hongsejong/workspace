@@ -21,4 +21,17 @@ ORDER BY REPLY_NO
 INSERT INTO REPLY 
 VALUES(SEQ_RNO.NEXTVAL, ?, DEFAULT, DEFAULT, ?,?)
 </entry>
+
+<!-- 댓글 삭제 -->
+<entry key="deleteReply">
+UPDATE REPLY SET
+REPLY_ST ='Y'
+WHERE REPLY_NO=?
+</entry>
+
+<entry key="updateReply">
+UPDATE REPLY SET
+REPLY_CONTENT =?
+WHERE REPLY_NO=?
+</entry>
 </properties>

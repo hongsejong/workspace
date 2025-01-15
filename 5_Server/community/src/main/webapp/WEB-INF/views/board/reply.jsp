@@ -11,6 +11,7 @@ pageEncoding="UTF-8"%>
         <ul id="reply-list">
 
             <c:forEach var="reply" items="${rList}">
+                <!-- ${reply} -->
                 <!-- 시작 -->
                 <li class="reply-row">
                      <p class="reply-writer">
@@ -33,13 +34,22 @@ pageEncoding="UTF-8"%>
                      <c:if test="${reply.memberNo==loginMember.memberNo}">
 
                          <div class="reply-btn-area">
-                             <button>수정</button>
-                             <button>삭제</button>
+                             <button onclick="showUpdateReply(${reply.replyNo}, this)">수정</button>
+                             <button onclick="deleteReply(${reply.replyNo})">삭제</button>
                          </div>
                      </c:if>
                 </li>
                 <!-- 끝 -->
             </c:forEach>
+
+            <!-- <li class="reply-row">
+                <textarea class="update-textarea">기존 댓글 내용</textarea>
+                
+                <div class="reply-btn-area">
+                    <button>수정</button>
+                    <button>취소</button>
+                </div>
+            </li> -->
             
 
 

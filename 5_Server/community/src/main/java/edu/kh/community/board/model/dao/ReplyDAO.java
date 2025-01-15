@@ -45,7 +45,7 @@ public class ReplyDAO {
 		         rs= pstmt.executeQuery();
 				while(rs.next()) {
 					Reply reply=new Reply();
-					reply.setMemberNo(rs.getInt("REPLY_NO"));
+					reply.setReplyNo(rs.getInt("REPLY_NO"));   
 					reply.setReplyContent(rs.getString("REPLY_CONTENT"));
 					reply.setCreateDate(rs.getString("CREATE_DT"));
 					reply.setMemberNo(rs.getInt("MEMBER_NO"));
@@ -73,6 +73,39 @@ public class ReplyDAO {
 	         pstmt.setString(1, replyContent);
 	         pstmt.setInt(2, memberNo);
 	         pstmt.setInt(3, boardNo);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      }  finally {
+	           close(pstmt);
+	        }
+		
+		return result;
+	}
+
+	public int deleteReply(Connection conn, int replyNo) throws Exception{
+		int result=0; 
+		try {
+	         pstmt = conn.prepareStatement(prop.getProperty("deleteReply"));
+	         
+	         pstmt.setInt(1, replyNo);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      }  finally {
+	           close(pstmt);
+	        }
+		
+		return result;
+	}
+
+	public int updateReply(Connection conn, int replyNo, String updateContent) throws Exception {
+		int result=0; 
+		try {
+	         pstmt = conn.prepareStatement(prop.getProperty("updateReply"));
+	         
+	         pstmt.setString(1, updateContent);
+	         pstmt.setInt(2, replyNo);
 	         
 	         result = pstmt.executeUpdate();
 	         
