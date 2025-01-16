@@ -146,6 +146,20 @@ public class MemberService {
 	}
 
 
+	public int profileChange(int memberNo, String profileImage) throws Exception {
+		
+		Connection conn = getConnection();
+	      
+	      int result = dao.profileChange(memberNo,profileImage,conn);
+	      if (result == 0) {rollback(conn);
+	      } else {commit(conn);}
+	      
+	      close(conn);
+	      
+	      return result;
+	}
+
+
 
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 import static edu.kh.community.common.JDBCTemplate.*;
 
+import edu.kh.community.board.model.dto.BoardDetail;
 import edu.kh.community.member.model.dto.Member;
 
 public class MemberDAO {
@@ -318,6 +319,36 @@ public class MemberDAO {
 	        }
 	      
 	      return memberList;
+	}
+
+	/** 프로필 이미지 변경
+	 * @param memberNo
+	 * @param profileImage
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int profileChange(int memberNo, String profileImage, Connection conn) throws Exception {
+		
+		   int result = 0;
+		      
+		      try {
+		         pstmt = conn.prepareStatement(prop.getProperty("changeProfile"));
+		         pstmt.setString(1,profileImage);
+		         pstmt.setInt(2, memberNo);
+		         
+		         result = pstmt.executeUpdate();
+		         System.out.println(result);
+		         
+		      
+		         
+		      } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		           close(pstmt);
+		        }
+		      
+		      return result;
 	}
 	
 	
