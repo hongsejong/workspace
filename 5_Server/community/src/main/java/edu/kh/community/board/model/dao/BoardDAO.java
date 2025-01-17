@@ -122,6 +122,7 @@ public class BoardDAO {
 	        	 board.setMemberNickname(rs.getString("MEMBER_NICK"));
 	        	 board.setCreateDate(rs.getString("CREATE_DT"));
 	        	 board.setReadCount(rs.getInt("READ_COUNT"));
+	        	 board.setThumbnail(rs.getString("THUMBNAIL"));
 	    
 	        	 boardList.add(board);
 	         }
@@ -213,6 +214,92 @@ public class BoardDAO {
 
 		
 	}
+
+
+
+	/**다음 게시글 번호 조회
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int nextBoardNo(Connection conn) throws Exception{
+		
+		int boardNo=0;
+		
+		try {
+			String sql = prop.getProperty("nextBoardNo");
+			
+			stmt = conn.createStatement();
+			
+			rs= stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				boardNo = rs.getInt(1);
+			}
+		}finally {
+			close(rs);
+			close(stmt);
+			
+		}
+		
+		return boardNo;
+	
+	}
+
+
+
+	public int insertBoard(BoardDetail detail, int boardNo, int boardCode, Connection conn) {
+		 int result = 0;
+	      try {
+	         pstmt = conn.prepareStatement(prop.getProperty("insertBoard"));
+	         pstmt.setInt(1, boardNo);
+	         pstmt.setString(2, detail.getBoardTitle());
+	         pstmt.setString(3, detail.getBoardContent());
+	         pstmt.setInt(4, detail.getMemberNo());
+	         pstmt.setInt(5, boardCode);
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           close(pstmt);
+	           
+	        }
+	      
+	      
+	      return result;
+	
+	}
+
+
+
+	public int insertBoardImage(Connection conn, BoardImage image) {
+		 int result = 0;
+	      try {
+	         pstmt = conn.prepareStatement(prop.getProperty("insertImage"));
+	         pstmt.setString(1, image.getImageRename());
+	         pstmt.setString(2, image.getImageOriginal());
+	         pstmt.setInt(3, image.getImageLevel());
+	         pstmt.setInt(4, image.getBoardNo());
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           close(pstmt);
+	           
+	        }
+	      
+	      
+	      return result;
+	}
+
+
+
+
+
+
+	
 
 
 

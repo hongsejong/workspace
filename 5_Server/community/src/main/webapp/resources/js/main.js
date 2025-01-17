@@ -70,10 +70,9 @@ document.getElementById("selectBtn").addEventListener("click",()=>{
         data :{"inputEmail" : input.value},
         type : "POST",
         dataType :"JSON", // dataType : 응답데이터 형식을 지정
-                          // -> JSON으로 지정 시 자동으로 JS 객체로 변환
+        // -> JSON으로 지정 시 자동으로 JS 객체로 변환
         success : function(member){
            console.log(member); // JS 객체 형태 문자열(dateType 미지정 시)
-
 
             // JSON.parse(문자열) : 문자열 -> JS 객체로 변환
            // console.log(JSON.parse(member));
@@ -82,24 +81,30 @@ document.getElementById("selectBtn").addEventListener("click",()=>{
            div.innerText="";
 
            if(member !=null){ // 회원 정보 존재 O
-
+            
                 // ul 요소 생성
-                const tr = document.createElement("tr");
+                const ul = document.createElement("ul");
 
                 // li 요소 생성 * 5 + 내용 추가
-                const td1 = document.createElement("td");
-                const li1 =document.createElement("li");
-                li1.innerText=`이메일 : ${member.memberEmail}`; 
-                const td2 = document.createElement("td");
-                const li2 =document.createElement("li");
-                li2.innerText=`닉네임 : ${member.memberNickname}`; 
-                const td3 = document.createElement("td");
-                const li3 =document.createElement("li");
-                li3.innerText=`전화번호 : ${member.memberTel}`; 
-                
-                div.append(li1,li2,li3,li4,li5);
+                const li1 = document.createElement("li");
+                li1.innerText = `이메일 : ${member.memberEmail}`;  
 
-                // div($result1)에 ul 추가
+                const li2 = document.createElement("li");
+                li2.innerText = `닉네임 : ${member.memberNickname}`;
+
+                const li3 = document.createElement("li");
+                li3.innerText = `전화번호 : ${member.memberTel}`;
+
+                const li4 = document.createElement("li");
+                li4.innerText = `주소 : ${member.memberAddress}`;
+
+                const li5 = document.createElement("li");
+                li5.innerText = `가입일 : ${member.enrollDate}`;
+
+                // ul에 li를 순서대로 추가
+                ul.append(li1,li2,li3,li4,li5);
+
+                //div에 ul 추가
                 div.append(ul);
 
            }else{//회원정보가 존재하지 않을때

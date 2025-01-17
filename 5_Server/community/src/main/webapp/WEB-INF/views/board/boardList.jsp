@@ -48,7 +48,14 @@ pageEncoding="UTF-8"%>
                                 <c:forEach var="board" items="${boardList}">
                                     <tr>
                                         <td>${board.boardNo}</td>
-                                        <td><a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}">${board.boardTitle}</a></td>
+                                        <td>
+                                            <!-- 썸네일이 존재하는 경우-->
+                                            <c:if test="${!empty board.thumbnail}">
+                                                <img src="${contextPath}${board.thumbnail}" class="list-thumbnail">
+
+                                            </c:if>
+                                            <a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}">${board.boardTitle}</a>
+                                        </td>
                                         <td>${board.memberNickname}</td>
                                         <td>${board.createDate}</td>
                                         <td>${board.readCount}</td>
@@ -70,10 +77,11 @@ pageEncoding="UTF-8"%>
                     </tbody>
                 </table>
             </div>
-
-            <div class="btn-area">
-                <button id="insertBtn">글쓰기</button>
-            </div>
+            <c:if test="${!empty loginMember}">
+                <div class="btn-area">
+                    <button id="insertBtn" onclick="location.href='write?mode=insert&type=${param.type}&cp=${param.cp}'">글쓰기</button>
+                </div>
+            </c:if>
 
             <div class="pagination-area">
                 <!-- 페이지네이션 a태그에 사용될 공통 주소를 저장한 변수 선언 -->

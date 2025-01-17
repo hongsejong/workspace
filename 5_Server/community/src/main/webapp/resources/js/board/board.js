@@ -22,6 +22,8 @@ console.log("board.js연결됨");
 
             url += "/board/list?"
             // /community/board/list?
+            
+            
 
             //URL 내장 객체 : 주소 관련 정보를 나타내는 객체
             //URL.searchParams : 쿼리스트링만 별도 객체로 반환
@@ -29,8 +31,22 @@ console.log("board.js연결됨");
 
             const params = new URL(location.href).searchParams;
 
-            const type = "type="+ params.get("type");
-            const cp="cp=" + params.get("cp");
+            // const type = "type="+ params.get("type");
+            let type;
+            let cp;
+
+            if(params.get("cp") !=null){ //쿼리스트링에 cp가 없는 경우
+                cp="cp=" + params.get("cp");
+            }else{
+                cp= "cp=1";
+            }
+
+            if(params.get("type") !=null){ //쿼리스트링에 type가 없는 경우
+                type = "type="+ params.get("type");
+            }else{
+                type= "type=1";
+            }
+            
             // console.log(type)
             // console.log(cp)
 
