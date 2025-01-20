@@ -94,4 +94,9 @@ VALUES(?,?,?, DEFAULT,DEFAULT,DEFAULT,DEFAULT,?,?)
 	INSERT INTO BOARD_IMG
 VALUES(SEQ_IMG_NO.NEXTVAL,?,?,?,?)
 	</entry>
+	
+	<entry key="BoardDelete">
+	UPDATE BOARD SET BOARD_ST='Y'
+	WHERE BOARD_NO =?
+	</entry>
 </properties>

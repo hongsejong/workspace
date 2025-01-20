@@ -13,6 +13,7 @@ import edu.kh.community.board.model.dto.BoardDetail;
 import edu.kh.community.board.model.dto.BoardImage;
 import edu.kh.community.board.model.dto.Pagination;
 import edu.kh.community.common.Util;
+import edu.kh.community.member.model.dto.Member;
 
 public class BoardService {
 	
@@ -136,6 +137,27 @@ public class BoardService {
 		 close(conn);
 		 
 		return boardNo;
+	}
+
+	/**게시글 삭제
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int BoardDelete(int boardNo) throws Exception{
+		 
+			      
+			      Connection conn = getConnection();
+			      
+			      int result = dao.BoardDelete(boardNo, conn);
+			      if (result != 0) {commit(conn);
+			      } else {rollback(conn);}
+			      
+			      close(conn);
+			      
+			      return result;
+			      
+			   
 	}
 
 }
