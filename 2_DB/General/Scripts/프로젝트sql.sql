@@ -1,3 +1,48 @@
+SELECT * FROM BOARD;
+CREATE SEQUENCE SEQ_FREEBOARD_NO NOCACHE;
+BEGIN
+    FOR I IN 1..2 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_FREEBOARD_NO.NEXTVAL,
+               SEQ_FREEBOARD_NO.CURRVAL || '번째 게시글',
+               SEQ_FREEBOARD_NO.CURRVAL || '번째 게시글 내용입니다.',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 1, 1
+        );
+    END LOOP;
+END;
+/
+;
+SELECT * FROM BOARD_TYPE ;
+INSERT INTO "BOARD_TYPE"
+VALUES(1,'자유게시판');
+
+SELECT * FROM CATEGORY_TYPE ;
+INSERT INTO "CATEGORY_TYPE"
+VALUES(1,'자유게시판',-1);
+
+CREATE SEQUENCE SEQ_MEMBER_NO;
+
+INSERT INTO "USER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01', 'pass01!', 
+    '유저일' ,'홍길동','user01@naver.com', DEFAULT,01012341234,DEFAULT,DEFAULT
+     );
+
+COMMIT;
+
+SELECT * FROM "USER";
+SELECT * FROM BOARD;
+COMMIT;
+
+DROP TABLE BOARD ON DELETE CASCADE;
+
+
+
+--------------------------------------------------------------
+--아래 예시 위 프로젝트
+---------------------------------------------------------------
+
+
 -- 예전 버전(11g 이전 버전) 오라클 구문 사용하기
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
