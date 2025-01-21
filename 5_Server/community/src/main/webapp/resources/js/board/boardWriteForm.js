@@ -6,10 +6,16 @@ const inputImage = document.getElementsByClassName('inputImage');
 const deleteImage= document.getElementsByClassName("delete-image");
 const preview = document.getElementsByClassName("preview");
 
+//게시글 수정 시 삭제된 이미지의 레벨(위치)를 저장할 input 요소
+const deleteList = document.getElementById('deleteList');
+
+const deleteSet = new Set(); // 순서 X , 중복 허용 X -> 여러번 클릭 시 중복 값 저장 방지
+
 for(let i=0; i<inputImage.length; i++){
     // 파일이 선택되었을 때
 
     inputImage[i].addEventListener("change",e=>{
+       
         
 
         if(e.target.files[0] != undefined){
@@ -25,6 +31,10 @@ for(let i=0; i<inputImage.length; i++){
                 // e.target == reader
                 // e.target.result == 읽어들인 이미지의 URL
                 // preview[i] == 파일이 선택된 input태그와 인접한 preview 이미지 태그
+                
+
+                //deleteSet에 해당 레벨 제거 -> 삭제 목록에서 제외시킴
+                deleteSet.delete(i);
             }
         }else{ //파일이 선택되지 않았을 때 (취소)
             preview[i].removeAttribute("src"); //src 속성 제거
@@ -48,6 +58,9 @@ for(let i=0; i<deleteImage.length;i++){
     
             //input의 값을 ''변경
             inputImage[i].value = '';
+
+            //deleteSet에 삭제된 이미지 레벨 추가
+            deleteSet.add(i);
         }
 
     })
@@ -77,6 +90,20 @@ function writeValidate(){
         //                 제출 X
         return false;
     }
+
+    //제목, 내용이 유효한 경우
+    //deleteList(input태그) 에 deleteSet(삭제된 이미지 레벨)을 추가
+    //-> JS 배열 특징 이용
+    //    : JS배열을 HTML요소 또는 console에 출력하게 되는 경우
+    //      1,2,3 같은 문자열로 출력됨 (배열 기호가 벗겨짐)
+
+    // * Set -> Array로 변경 -> deleteList.value에 대입
+
+    // Array.from(유사배열 | 컬렉션) : 유사 배열 | 컬렉션을 배열로 변환해서 반환
+    deleteList.value= Array.from(deleteSet);
+    return true;
+
+    // deleteList.value = deleteSet; 사용X
 
 
 

@@ -41,11 +41,11 @@ console.log("board.js연결됨");
                 cp= "cp=1";
             }
 
- /*           if(params.get("type") !=null){ //쿼리스트링에 type가 없는 경우
+            if(params.get("type") !=null){ //쿼리스트링에 type가 없는 경우
                 type = "type="+ params.get("type");
             }else{
                 type= "type=1";
-            }*/
+            }
             
             // console.log(type)
             // console.log(cp)

@@ -160,4 +160,60 @@ public class BoardService {
 			   
 	}
 
+	/** 게시글 수정 
+	 * @param detail
+	 * @param imageList
+	 * @param deleteList
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
+		Connection conn = getConnection();
+		
+		// 1. 게시글 부분(제목,내용,마지막 수정일) 수정
+		
+		// 1) XSS 방지 처리(제목,내용)
+		detail.setBoardContent(Util.XSSHandling(detail.getBoardContent()));
+		detail.setBoardTitle(Util.XSSHandling(detail.getBoardTitle()));
+		
+		// 2) 개행문자 처리 (내용)
+		detail.setBoardContent(Util.newLineHandling(detail.getBoardContent()));
+		// 3) DAO 호출
+		int result=dao.updateBoard(detail,conn);
+		
+		if(result >0) { //게시글 수정 성공 시
+			
+			// 2. 이미지 부분 수정(기존 -> 변경, 없었다가 -> 추가)
+			for(BoardImage img :imageList) {
+				//게시글 번호 세팅
+				img.setBoardNo(detail.getBoardNo());
+				
+				
+				// img(변경명, 원본명, 게시글번호,이미지레벨) 들어가있음
+				result = dao.updateBoardImage(conn,img);
+				// result == 1 : 수정성공
+				// result == 0 : 수정 실패 -> 기존에 없다가 새로 추가된 이미지 -> insert 진행
+				
+				if(result==0) {
+					result= dao.insertBoardImage(conn, img);
+				}
+				
+			}
+			// 3. 이미지 삭제
+			// deleteList(값O : "1,2,3" / 값X : ""빈문자열) 
+			// 삭제된 이미지 레벨이 기록되어 있을 때만 삭제
+			if(!deleteList.equals("")) {
+				result = dao.deleteBoardImage(conn, detail.getBoardNo(),deleteList);
+			}
+			
+		      if (result > 0) {commit(conn);
+		      } else {rollback(conn);}
+		      
+		      close(conn);
+		      
+		}
+		
+		return result;
+	}
+
 }
