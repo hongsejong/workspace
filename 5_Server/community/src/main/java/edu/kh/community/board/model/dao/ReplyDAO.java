@@ -2,6 +2,7 @@ package edu.kh.community.board.model.dao;
 
 import static edu.kh.community.common.JDBCTemplate.close;
 
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
