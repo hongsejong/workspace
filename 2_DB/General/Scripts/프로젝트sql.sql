@@ -442,3 +442,61 @@ INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트2', DEFAULT, DEFA
 COMMIT;
 
 
+
+-- 회원 비밀번호 암호화로 길이 조정
+ALTER TABLE "USER" MODIFY MEMBER_PW VARCHAR2(100);
+
+--게시판 종류: 공지사항 추가
+INSERT INTO "BOARD_TYPE"
+VALUES(4,'공지사항게시판');
+
+--공지사항 샘플 데이터
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(공지사항)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(-1).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 4, -1
+        );
+    END LOOP;
+END;
+/;
+
+
+DROP  SEQUENCE CHALLENGE_BOARD_NO;
+CREATE SEQUENCE CHALLENGE_BOARD_NO NOCACHE START WITH 100;
+
+BEGIN
+    FOR I IN 1..4 LOOP
+       FOR J IN 1..3 LOOP
+    
+           INSERT INTO CHALLENGE_BOARD
+           VALUES( CHALLENGE_BOARD_NO.NEXTVAL,
+                   CHALLENGE_BOARD_NO.CURRVAL || '도전도전(공지사항)' || CHALLENGE_BOARD_NO.CURRVAL,
+                      CHALLENGE_BOARD_NO.CURRVAL || '번째 도전 내용임.',
+                     SYSDATE + 30*(4-J),
+                     DEFAULT,
+                     '/resources/images/challengeBoard/' ||
+                     CASE i 
+                       WHEN 1 THEN '기상'
+                       WHEN 2 THEN '운동'
+                       WHEN 3 THEN '자기계발'
+                       WHEN 4 THEN '기타'
+                       ELSE 'Unknown' 
+                   END
+                   || j
+                   || '.jpg',
+                     DEFAULT, 
+                     DEFAULT, 
+                     DEFAULT, 
+                     DEFAULT, 
+                     I, 
+                     J
+           );
+        
+        END LOOP;
+    END LOOP;
+END;
+/;

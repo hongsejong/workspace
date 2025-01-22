@@ -190,6 +190,7 @@ public class BoardWriteController extends HttpServlet{
 				
 				detail.setBoardNo(boardNo);
 				
+				
 				//detail, imageList , deleteList
 				int result = service.updateBoard(detail,imageList,deleteList);
 				
