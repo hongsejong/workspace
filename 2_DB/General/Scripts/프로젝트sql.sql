@@ -500,3 +500,21 @@ BEGIN
     END LOOP;
 END;
 /;
+
+ALTER TABLE BOARD ADD(ANSWER_ST CHAR(1) DEFAULT 'N');
+COMMENT ON COLUMN "BOARD"."ANSWER_ST" IS '답변 상태(답변 전: N, 답변 완료: Y)';
+ALTER TABLE BOARD ADD(SECRET_ST CHAR(1) DEFAULT 'N');
+COMMENT ON COLUMN "BOARD"."SECRET_ST" IS '비밀글 상태';
+
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(질문)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(3).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 2, 2, 3, DEFAULT, 'Y'
+        );
+    END LOOP;
+END;
+/;
