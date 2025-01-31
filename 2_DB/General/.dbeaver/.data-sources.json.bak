@@ -165,6 +165,27 @@
 		"oracle_thin-194829202e9-5b35dfc683adf27d": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
+			"name": "project_hsj 사용자 계정",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@//localhost:1521/XE",
+				"configurationType": "MANUAL",
+				"home": "C:\\app\\user1\\product\\18.0.0\\dbhomeXE",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-194ba6ed545-34a0b041668a0654": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
 			"name": "localhost",
 			"save-password": true,
 			"configuration": {

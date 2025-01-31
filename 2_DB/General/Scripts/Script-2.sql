@@ -1,0 +1,596 @@
+-- 회원 테이블
+DROP TABLE "USER";
+
+CREATE TABLE "USER" (
+   "MEMBER_NO"   NUMBER      NOT NULL,
+   "MEMBER_ID"   VARCHAR2(10)      NOT NULL,
+   "MEMBER_PW"   VARCHAR2(100)      NOT NULL,
+   "MEMBER_NK"   VARCHAR2(30)      NOT NULL,
+   "MEMBER_NM"   VARCHAR2(15)      NULL,
+   "MEMBER_EMAIL"   VARCHAR2(50)      NULL,
+   "PROFILE_IMG"   VARCHAR2(200)      NULL,
+   "MEMBER_TEL"   CHAR(11)      NULL,
+   "SECESSION_FL"   CHAR(1)   DEFAULT 'N'   NOT NULL,
+   "MANAGER_FL"   CHAR(1)   DEFAULT 'N'   NOT NULL
+);
+
+COMMENT ON COLUMN "USER"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+COMMENT ON COLUMN "USER"."MEMBER_ID" IS '회원 아이디(최대 10글자)';
+
+COMMENT ON COLUMN "USER"."MEMBER_PW" IS '회원 비밀번호';
+
+COMMENT ON COLUMN "USER"."MEMBER_NK" IS '회원 닉네임(중복 X)';
+
+COMMENT ON COLUMN "USER"."MEMBER_NM" IS '회원 이름(최대 5글자)';
+
+COMMENT ON COLUMN "USER"."MEMBER_EMAIL" IS '회원 이메일';
+
+COMMENT ON COLUMN "USER"."PROFILE_IMG" IS '회원 프로필 이미지';
+
+COMMENT ON COLUMN "USER"."MEMBER_TEL" IS '전화번호(- 미포함)';
+
+COMMENT ON COLUMN "USER"."SECESSION_FL" IS '탈퇴 여부(Y: 탈퇴, N: 미 탈퇴)';
+
+COMMENT ON COLUMN "USER"."MANAGER_FL" IS '관리자 여부(Y:  관리자, N: 회원)';
+
+------------------------------------------------------------------------------------------
+-- 게시글 테이블
+DROP TABLE "BOARD";
+
+CREATE TABLE "BOARD" (
+   "POST_NO"   NUMBER      NOT NULL,
+   "POST_TITLE"   VARCHAR2(150)      NOT NULL,
+   "POST_CONTENT"   VARCHAR2(4000)      NOT NULL,
+   "CREATE_DT"   DATE   DEFAULT SYSDATE   NOT NULL,
+   "UPDATE_DT"   DATE      NULL,
+   "POST_COUNT"   NUMBER   DEFAULT 0   NOT NULL,
+   "POST_ST"   CHAR(1)   DEFAULT 'N'   NOT NULL,
+   "MEMBER_NO"   NUMBER      NOT NULL,
+   "BOARD_NO"   NUMBER      NOT NULL,
+   "CATEGORY_NO"   NUMBER      NULL,
+   "ANSWER_ST"   CHAR(1)   DEFAULT 'N'   NOT NULL,
+   "SECRET_ST"   CHAR(1)   DEFAULT 'N'   NOT NULL
+);
+
+COMMENT ON COLUMN "BOARD"."POST_NO" IS '게시글번호(시퀀스)';
+
+COMMENT ON COLUMN "BOARD"."POST_TITLE" IS '게시글제목';
+
+COMMENT ON COLUMN "BOARD"."POST_CONTENT" IS '게시글내용';
+
+COMMENT ON COLUMN "BOARD"."CREATE_DT" IS '작성일';
+
+COMMENT ON COLUMN "BOARD"."UPDATE_DT" IS '마지막 수정일';
+
+COMMENT ON COLUMN "BOARD"."POST_COUNT" IS '조회수';
+
+COMMENT ON COLUMN "BOARD"."POST_ST" IS '게시글 상태(정상N,삭제Y)';
+
+COMMENT ON COLUMN "BOARD"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+COMMENT ON COLUMN "BOARD"."BOARD_NO" IS '게시판 번호(시퀀스)';
+
+COMMENT ON COLUMN "BOARD"."CATEGORY_NO" IS '카테고리 번호(시퀀스)';
+
+COMMENT ON COLUMN "BOARD"."ANSWER_ST" IS '답변 상태(답변 전: N, 답변 완료: Y)';
+
+COMMENT ON COLUMN "BOARD"."SECRET_ST" IS '비밀글 상태';
+
+------------------------------------------------------------------------------------------
+-- 도전 게시글 테이블
+DROP TABLE "CHALLENGE_BOARD";
+
+CREATE TABLE "CHALLENGE_BOARD" (
+   "CHALLENGE_NO"   NUMBER      NOT NULL,
+   "CHALLENGE_TITLE"   VARCHAR2(150)      NOT NULL,
+   "CHALLENGE_CONTENT"   VARCHAR2(1000)      NOT NULL,
+   "CHALLENGE_DURATION"   DATE      NOT NULL,
+   "CREATE_DT"   DATE   DEFAULT SYSDATE   NOT NULL,
+   "THUMBNAIL_IMG"   VARCHAR2(200)      NULL,
+   "CHALLENGE_COUNT"   NUMBER   DEFAULT 0   NOT NULL,
+   "IMG_YN"   CHAR(1)   DEFAULT 'C'   NOT NULL,
+   "CONTENT_YN"   CHAR(1)   DEFAULT 'C'   NOT NULL,
+   "OPEN_YN"   VARCHAR2(20)   DEFAULT NULL   NULL,
+   "CATEGORY_NO"   NUMBER      NOT NULL,
+   "MEMBER_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CHALLENGE_NO" IS '게시글번호(시퀀스)';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CHALLENGE_TITLE" IS '게시글제목';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CHALLENGE_CONTENT" IS '게시글내용';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CHALLENGE_DURATION" IS '처음 생성시 마지막 날 저장하기';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CREATE_DT" IS '작성일';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."THUMBNAIL_IMG" IS '썸네일';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CHALLENGE_COUNT" IS '조회수';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."IMG_YN" IS '사진 포함 여부(Y: 필수,C: 선택,N: 불가)';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CONTENT_YN" IS '본문 포함 여부(Y: 필수,C: 선택)';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."OPEN_YN" IS '도전이 비공개일 시 초대코드';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."CATEGORY_NO" IS '카테고리 번호(시퀀스)';
+
+COMMENT ON COLUMN "CHALLENGE_BOARD"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+------------------------------------------------------------------------------------------
+-- 댓글 테이블
+DROP TABLE "COMMENT";
+
+CREATE TABLE "COMMENT" (
+   "COMMENT_NO"   NUMBER      NOT NULL,
+   "COMMENT_CONTENT"   VARCHAR2(300)      NOT NULL,
+   "CREATE_DT"   DATE   DEFAULT SYSDATE   NOT NULL,
+   "COMMENT_FL"   CHAR(1)   DEFAULT 'N'   NOT NULL,
+   "POST_NO"   NUMBER      NOT NULL,
+   "MEMBER_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "COMMENT"."COMMENT_NO" IS '댓글 번호(시퀀스)';
+
+COMMENT ON COLUMN "COMMENT"."COMMENT_CONTENT" IS '댓글 내용(한글 최대 100글자)';
+
+COMMENT ON COLUMN "COMMENT"."CREATE_DT" IS '작성일';
+
+COMMENT ON COLUMN "COMMENT"."COMMENT_FL" IS '댓글 상태(Y: 삭제, N: 미 삭제)';
+
+COMMENT ON COLUMN "COMMENT"."POST_NO" IS '게시글번호(시퀀스)';
+
+COMMENT ON COLUMN "COMMENT"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+------------------------------------------------------------------------------------------
+-- 도전 인증 테이블
+DROP TABLE "PROOF_BOARD";
+
+CREATE TABLE "PROOF_BOARD" (
+   "PROOF_NO"   NUMBER      NOT NULL,
+   "PROOF_IMG"   VARCHAR2(100)      NULL,
+   "PROOF_CONTENT"   VARCHAR2(4000)      NULL,
+   "PROOF_DT"   DATE   DEFAULT SYSDATE   NOT NULL,
+   "CHALLMEM_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "PROOF_BOARD"."PROOF_NO" IS '도전인증 고유ID(시퀸스)';
+
+COMMENT ON COLUMN "PROOF_BOARD"."PROOF_IMG" IS '인증 사진 주소';
+
+COMMENT ON COLUMN "PROOF_BOARD"."PROOF_CONTENT" IS '인증 글 본문';
+
+COMMENT ON COLUMN "PROOF_BOARD"."PROOF_DT" IS '도전 인증 날짜';
+
+COMMENT ON COLUMN "PROOF_BOARD"."CHALLMEM_NO" IS '도전참여한 회원용 고유번호(시퀸스)';
+
+------------------------------------------------------------------------------------------
+-- 게시판 종류 테이블
+DROP TABLE "BOARD_TYPE";
+
+CREATE TABLE "BOARD_TYPE" (
+   "BOARD_NO"   NUMBER      NOT NULL,
+   "BOARD_TITLE"   VARCHAR2(30)      NOT NULL
+);
+
+COMMENT ON COLUMN "BOARD_TYPE"."BOARD_NO" IS '게시판 번호(시퀀스) / 1자유 2질문 3신고관리';
+
+COMMENT ON COLUMN "BOARD_TYPE"."BOARD_TITLE" IS '게시판 이름';
+
+------------------------------------------------------------------------------------------
+-- 신고 테이블
+DROP TABLE "REPORT";
+
+CREATE TABLE "REPORT" (
+   "MEMBER_NO"   NUMBER      NOT NULL,
+   "POST_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "REPORT"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+COMMENT ON COLUMN "REPORT"."POST_NO" IS '게시글번호(시퀀스)';
+
+------------------------------------------------------------------------------------------
+-- 추천 테이블
+DROP TABLE "RECOMMEND";
+
+CREATE TABLE "RECOMMEND" (
+   "MEMBER_NO"   NUMBER      NOT NULL,
+   "POST_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "RECOMMEND"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+COMMENT ON COLUMN "RECOMMEND"."POST_NO" IS '게시글번호(시퀀스)';
+
+------------------------------------------------------------------------------------------
+-- 도전 회원 테이블
+DROP TABLE "CHALLENGE_MEMBER";
+
+CREATE TABLE "CHALLENGE_MEMBER" (
+   "CHALLMEM_NO"   NUMBER      NOT NULL,
+   "CHALLENGE_NO"   NUMBER      NOT NULL,
+   "MEMBER_NO"   NUMBER      NOT NULL
+);
+
+COMMENT ON COLUMN "CHALLENGE_MEMBER"."CHALLMEM_NO" IS '도전참여한 회원용 고유번호(시퀸스)';
+
+COMMENT ON COLUMN "CHALLENGE_MEMBER"."CHALLENGE_NO" IS '게시글번호(시퀀스)';
+
+COMMENT ON COLUMN "CHALLENGE_MEMBER"."MEMBER_NO" IS '회원번호(시퀀스)';
+
+------------------------------------------------------------------------------------------
+-- 카테고리 테이블
+DROP TABLE "CATEGORY_TYPE";
+
+CREATE TABLE "CATEGORY_TYPE" (
+   "CATEGORY_NO"   NUMBER      NOT NULL,
+   "CATEGORY_TITLE"   VARCHAR2(30)      NOT NULL,
+   "CATEGORY_IMG"   VARCHAR2(100)      NOT NULL
+);
+
+COMMENT ON COLUMN "CATEGORY_TYPE"."CATEGORY_NO" IS '카테고리 번호(시퀀스)';
+
+COMMENT ON COLUMN "CATEGORY_TYPE"."CATEGORY_TITLE" IS '카테고리 이름';
+
+COMMENT ON COLUMN "CATEGORY_TYPE"."CATEGORY_IMG" IS '카테고리 사진';
+
+------------------------------------------------------------------------------------------
+-- 키 설정
+ALTER TABLE "USER" ADD CONSTRAINT "PK_USER" PRIMARY KEY (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "BOARD" ADD CONSTRAINT "PK_BOARD" PRIMARY KEY (
+   "POST_NO"
+);
+
+ALTER TABLE "CHALLENGE_BOARD" ADD CONSTRAINT "PK_CHALLENGE_BOARD" PRIMARY KEY (
+   "CHALLENGE_NO"
+);
+
+ALTER TABLE "COMMENT" ADD CONSTRAINT "PK_COMMENT" PRIMARY KEY (
+   "COMMENT_NO"
+);
+
+ALTER TABLE "PROOF_BOARD" ADD CONSTRAINT "PK_PROOF_BOARD" PRIMARY KEY (
+   "PROOF_NO"
+);
+
+ALTER TABLE "BOARD_TYPE" ADD CONSTRAINT "PK_BOARD_TYPE" PRIMARY KEY (
+   "BOARD_NO"
+);
+
+ALTER TABLE "REPORT" ADD CONSTRAINT "PK_REPORT" PRIMARY KEY (
+   "MEMBER_NO",
+   "POST_NO"
+);
+
+ALTER TABLE "RECOMMEND" ADD CONSTRAINT "PK_RECOMMEND" PRIMARY KEY (
+   "MEMBER_NO",
+   "POST_NO"
+);
+
+ALTER TABLE "CHALLENGE_MEMBER" ADD CONSTRAINT "PK_CHALLENGE_MEMBER" PRIMARY KEY (
+   "CHALLMEM_NO"
+);
+
+ALTER TABLE "CATEGORY_TYPE" ADD CONSTRAINT "PK_CATEGORY_TYPE" PRIMARY KEY (
+   "CATEGORY_NO"
+);
+
+ALTER TABLE "BOARD" ADD CONSTRAINT "FK_USER_TO_BOARD_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "BOARD" ADD CONSTRAINT "FK_BOARD_TYPE_TO_BOARD_1" FOREIGN KEY (
+   "BOARD_NO"
+)
+REFERENCES "BOARD_TYPE" (
+   "BOARD_NO"
+);
+
+ALTER TABLE "BOARD" ADD CONSTRAINT "FK_CATEGORY_TYPE_TO_BOARD_1" FOREIGN KEY (
+   "CATEGORY_NO"
+)
+REFERENCES "CATEGORY_TYPE" (
+   "CATEGORY_NO"
+);
+
+ALTER TABLE "CHALLENGE_BOARD" ADD CONSTRAINT "FK_CATEGORY_TYPE_TO_CHALLENGE_BOARD_1" FOREIGN KEY (
+   "CATEGORY_NO"
+)
+REFERENCES "CATEGORY_TYPE" (
+   "CATEGORY_NO"
+);
+
+ALTER TABLE "CHALLENGE_BOARD" ADD CONSTRAINT "FK_USER_TO_CHALLENGE_BOARD_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "COMMENT" ADD CONSTRAINT "FK_BOARD_TO_COMMENT_1" FOREIGN KEY (
+   "POST_NO"
+)
+REFERENCES "BOARD" (
+   "POST_NO"
+);
+
+ALTER TABLE "COMMENT" ADD CONSTRAINT "FK_USER_TO_COMMENT_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "PROOF_BOARD" ADD CONSTRAINT "FK_CHALLENGE_MEMBER_TO_PROOF_BOARD_1" FOREIGN KEY (
+   "CHALLMEM_NO"
+)
+REFERENCES "CHALLENGE_MEMBER" (
+   "CHALLMEM_NO"
+);
+
+ALTER TABLE "REPORT" ADD CONSTRAINT "FK_USER_TO_REPORT_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "REPORT" ADD CONSTRAINT "FK_BOARD_TO_REPORT_1" FOREIGN KEY (
+   "POST_NO"
+)
+REFERENCES "BOARD" (
+   "POST_NO"
+);
+
+ALTER TABLE "RECOMMEND" ADD CONSTRAINT "FK_USER_TO_RECOMMEND_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+ALTER TABLE "RECOMMEND" ADD CONSTRAINT "FK_BOARD_TO_RECOMMEND_1" FOREIGN KEY (
+   "POST_NO"
+)
+REFERENCES "BOARD" (
+   "POST_NO"
+);
+
+ALTER TABLE "CHALLENGE_MEMBER" ADD CONSTRAINT "FK_CHALLENGE_BOARD_TO_CHALLENGE_MEMBER_1" FOREIGN KEY (
+   "CHALLENGE_NO"
+)
+REFERENCES "CHALLENGE_BOARD" (
+   "CHALLENGE_NO"
+);
+
+ALTER TABLE "CHALLENGE_MEMBER" ADD CONSTRAINT "FK_USER_TO_CHALLENGE_MEMBER_1" FOREIGN KEY (
+   "MEMBER_NO"
+)
+REFERENCES "USER" (
+   "MEMBER_NO"
+);
+
+------------------------------------------------------------------------------------------
+-- 샘플 데이터
+DROP SEQUENCE SEQ_MEMBER_NO;
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE;
+
+INSERT INTO "USER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01', 'aBN5hiegXlvAovJLipPoPd5LB+xjPrAeu1tcAVg0p5MKGocvo6l825SD+ZMCOcHBFeGB7MnzH31SAnDzYYsSdg==', '닉네임1', '홍길동', 'user01@naver.com',DEFAULT,01012341234,DEFAULT,DEFAULT);
+INSERT INTO "USER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user02', 'mTlIMwfl05/LB/4+pNF8IVsWnogD8Ibk5hSiZaWRMPV5oSA1SauUk1jT9j0Lif3VSDWW4+jGd4U4JvZtyrIHGQ==', '닉네임2', '탈퇴길동', 'user02@naver.com',DEFAULT,01012341235,'Y',DEFAULT);
+INSERT INTO "USER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user03', 'AWK1nM+CjAOElicQOH742Hgdbvccpnn/sChKmDsie2JcQEGbfWqKblQ4JrLuN2ZtAVwTr3NTJqoC/05NxrR74g==', '닉네임3', '관리길동', 'user03@naver.com',DEFAULT,01012341236,DEFAULT,'Y');
+
+INSERT INTO "BOARD_TYPE"
+VALUES(1,'자유게시판');
+INSERT INTO "BOARD_TYPE"
+VALUES(2,'질문게시판');
+INSERT INTO "BOARD_TYPE"
+VALUES(3,'신고관리게시판');
+INSERT INTO "BOARD_TYPE"
+VALUES(4,'공지사항게시판');
+
+INSERT INTO"CATEGORY_TYPE"
+VALUES (-1,'자유게시판','/resources/images/category/');
+INSERT INTO"CATEGORY_TYPE"
+VALUES (1,'운동','/resources/images/category/exercise.jpg');
+INSERT INTO"CATEGORY_TYPE"
+VALUES (2,'기상','/resources/images/category/wakeUp.jpg');
+INSERT INTO"CATEGORY_TYPE"
+VALUES (3,'자기계발','/resources/images/category/selfImprove.jpg');
+INSERT INTO"CATEGORY_TYPE"
+VALUES (4,'기타','/resources/images/category/ect.png');
+
+DROP SEQUENCE SEQ_BOARD_NO ;
+CREATE SEQUENCE SEQ_BOARD_NO NOCACHE;
+
+BEGIN
+    FOR I IN 1..100 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(자유)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다.',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 1, -1, DEFAULT, DEFAULT
+        );
+    END LOOP;
+END;
+/;
+
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(질문)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(1).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 2, 1, DEFAULT, DEFAULT
+        );
+    END LOOP;
+END;
+/;
+
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(질문)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(2).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 2, 2, DEFAULT, DEFAULT
+        );
+    END LOOP;
+END;
+/;
+
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(질문)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(3).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 2, 2, 3, DEFAULT, 'Y'
+        );
+    END LOOP;
+END;
+/;
+
+BEGIN
+    FOR I IN 1..50 LOOP
+    
+        INSERT INTO BOARD
+        VALUES(SEQ_BOARD_NO.NEXTVAL,
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글(공지사항)',
+               SEQ_BOARD_NO.CURRVAL || '번째 게시글 내용입니다(-1).',
+               DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1, 4, -1, DEFAULT, DEFAULT
+        );
+    END LOOP;
+END;
+/;
+
+DROP  SEQUENCE CHALLENGE_BOARD_NO;
+CREATE SEQUENCE CHALLENGE_BOARD_NO NOCACHE START WITH 100;
+
+BEGIN
+   FOR K IN 1..30 LOOP
+       FOR I IN 1..4 LOOP
+          FOR J IN 1..3 LOOP
+       
+              INSERT INTO CHALLENGE_BOARD
+              VALUES( CHALLENGE_BOARD_NO.NEXTVAL,
+                      CASE (i - 1) * 3 + j
+                          WHEN 1 THEN '매일 걷기'
+                          WHEN 2 THEN '자전거로 동네 한바퀴'
+                          WHEN 3 THEN '요가강습'
+                          WHEN 4 THEN '미라클모닝'
+                          WHEN 5 THEN '아침에 커피한잔'
+                          WHEN 6 THEN '아침맑은공기'
+                          WHEN 7 THEN '매일독서'
+                          WHEN 8 THEN '다함께 도자기체험'
+                          WHEN 9 THEN '매일영어공부'
+                          WHEN 10 THEN '일주일에 등산한번'
+                          WHEN 11 THEN '그림초보환영'
+                          WHEN 12 THEN '여행친구'
+                          ELSE '알 수 없음'
+                      END
+                      || '-' || CHALLENGE_BOARD_NO.CURRVAL,
+                         CHALLENGE_BOARD_NO.CURRVAL || '번째 도전 내용임.',
+                        SYSDATE + 30* (MOD((K+J),4)+1),
+                        DEFAULT,
+                        '/resources/images/challengeBoard/' ||
+                        CASE i 
+                          WHEN 1 THEN 'exercise'
+                          WHEN 2 THEN 'wakeUp'
+                          WHEN 3 THEN 'selfImprove'
+                          WHEN 4 THEN 'etc'
+                          ELSE 'Unknown' 
+                      END
+                      || j
+                      || '.jpg',
+                        DEFAULT, 
+                        DEFAULT, 
+                        DEFAULT, 
+                        DEFAULT, 
+                        I, 
+                        J
+              );
+           
+           END LOOP;
+       END LOOP;
+    END LOOP;
+END;
+/;
+
+DROP SEQUENCE SEQ_CHALLMEM_NO;
+CREATE SEQUENCE SEQ_CHALLMEM_NO NOCACHE;
+
+ALTER TABLE "CHALLENGE_MEMBER" 
+ADD CONSTRAINT CHALLMEM_UNIQUE UNIQUE ("CHALLENGE_NO", "MEMBER_NO");
+
+BEGIN
+       FOR J IN 1598..1599 LOOP
+
+           INSERT INTO CHALLENGE_MEMBER 
+           VALUES(SEQ_CHALLMEM_NO.NEXTVAL,
+                  J, 4
+           );
+        END LOOP;
+END;
+/;
+
+CREATE SEQUENCE SEQ_CHALLMEM_NO NOCACHE;
+CREATE SEQUENCE SEQ_PROOF_NO NOCACHE;
+
+DROP SEQUENCE SEQ_RNO ;
+CREATE SEQUENCE SEQ_RNO NOCACHE;
+
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트1', DEFAULT, DEFAULT, 1, 1);
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트1', DEFAULT, DEFAULT, 100, 1);
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트1', DEFAULT, DEFAULT, 150, 1);
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트2', DEFAULT, DEFAULT, 200, 1);
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트3(공지사항)', DEFAULT, DEFAULT, 251, 1);
+INSERT INTO "COMMENT" VALUES(SEQ_RNO.NEXTVAL, '댓글 테스트4(공지사항)', DEFAULT, DEFAULT, 251, 1);
+
+UPDATE "BOARD" SET
+POST_COUNT ='100'
+WHERE POST_NO=20;
+UPDATE "BOARD" SET
+POST_COUNT ='200'
+WHERE POST_NO=1;
+UPDATE "BOARD" SET
+POST_COUNT ='54'
+WHERE POST_NO=2;
+UPDATE "BOARD" SET
+POST_COUNT ='77'
+WHERE POST_NO=77;
+UPDATE "BOARD" SET
+POST_COUNT ='554'
+WHERE POST_NO=66;
+
+COMMIT;
+ROLLBACK;
+
+------------------------------------------------------------------------------------------
+-- 모든 테이블 조회
+--SELECT * FROM "USER" ;
+--SELECT * FROM BOARD WHERE BOARD_NO = 2 ;
+--SELECT * FROM BOARD_TYPE ;
+--SELECT * FROM CATEGORY_TYPE ;
+--SELECT * FROM CHALLENGE_BOARD ;
+--SELECT * FROM CHALLENGE_MEMBER ;
+--SELECT * FROM "COMMENT" ;
+--SELECT * FROM PROOF_BOARD ;
+--SELECT * FROM RECOMMEND ;
+--SELECT * FROM REPORT ;
