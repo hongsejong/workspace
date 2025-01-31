@@ -40,7 +40,7 @@
 	
 	<!-- 
 		base-package 이하에 작성된 @Component와
-		자식 어노테이션(@Controller, @Service, @repositoru)이 붙은
+		자식 어노테이션(@Controller, @Service, @repository)이 붙은
 		클래스를 찾아서 Bean(Spring이 관리하는 객체)으로 등록
 	 -->
 	<context:component-scan base-package="edu.kh.project" />

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.kh.project.member.model.dto.Member;
 
+
 //@RequestMapping("요청 주소")
 //-> GET / POST 구분 X (모두 받음, 주소만 맞으면 연결)
 
