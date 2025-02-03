@@ -94,6 +94,12 @@ AND MEMBER_PW = 'pass01!'
 ;
 
 
+UPDATE MEMBER SET
+MEMBER_PW= '$2a$10$v5.jvuEVAa0wMb83fkwRteW3gHU1ENg/elj9RjeVo3sevfICC/3a6';
+
+COMMIT;
+SELECT * FROM MEMBER;
+
 
 
 
