@@ -71,7 +71,7 @@
                             </label>
 
                             <article class="signup-find-area">
-                                <a href="#">회원가입</a>
+                                <a href="/member/signUp">회원가입</a>
                                 <span>|</span>
                                 <a href="#">ID/PW 찾기</a>
                             </article>
@@ -113,6 +113,8 @@
 
     <%-- footer --%>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <!-- main.js 추가 -->
+     <script src="/resources/js/main.js"></script>
 
 </body>
 </html>

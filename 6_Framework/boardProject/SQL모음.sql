@@ -100,6 +100,11 @@ MEMBER_PW= '$2a$10$v5.jvuEVAa0wMb83fkwRteW3gHU1ENg/elj9RjeVo3sevfICC/3a6';
 COMMIT;
 SELECT * FROM MEMBER;
 
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01@kh.or.kr', 'pass01!'
+	, '유저일', '01012341234', '06234,,서울 강남구 테헤란로 14길 6,,5층',
+	NULL, DEFAULT, DEFAULT, DEFAULT);
+
 
 
 
