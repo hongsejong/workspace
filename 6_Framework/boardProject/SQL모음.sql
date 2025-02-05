@@ -105,8 +105,26 @@ VALUES(SEQ_MEMBER_NO.NEXTVAL, 'user01@kh.or.kr', 'pass01!'
 	, '유저일', '01012341234', '06234,,서울 강남구 테헤란로 14길 6,,5층',
 	NULL, DEFAULT, DEFAULT, DEFAULT);
 
+UPDATE MEMBER SET
+MEMBER_NICKNAME='?'
+MEMBER_TEL ='?'
+MEMBER_ADDR ='?'
+WHERE MEMBER_NO ='?';
 
+--현재 로그인한 회원의 비밀번호 조회
+SELECT MEMBER_PW 
+FROM MEMBER
+WHERE MEMBER_NO=#{memberNo};
 
+-- 비밀번호 변경
+
+UPDATE MEMBER SET
+MEMBER_PW=#{memberPw}
+WHERE MEMBER_NO=#{memberNo};
+
+UPDATE MEMBER SET
+MEMBER_DEL_FL ='Y'
+WHERE MEMBER_NO=#{memberNo}
 
 
 
