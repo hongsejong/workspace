@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
-sss<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@ sss<!DOCTYPE html>
                 <h1 class="myPage-title">회원 탈퇴</h1>
                 <span class="myPage-subject">현재 비밀번호가 일치하는 경우 탈퇴할 수 있습니다.</span>
 
-                <form action="secession" method="POST" name="myPageFrm">
+                <form action="secession" method="POST" name="myPageFrm" id="secessionFrm">
 
                     <div class="myPage-row">
                         <label>비밀번호</label>
@@ -87,6 +87,6 @@ sss<!DOCTYPE html>
     </main>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+    <script src="/resources/js/myPage/myPage.js"></script>
 </body>
 </html>
