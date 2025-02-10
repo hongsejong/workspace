@@ -23,6 +23,7 @@ import com.kh.opendata.model.dto.Air;
 public class OpenAPIController {
 	
 	public static final String SERVICEKEY="%2BvZ6Dw19F1VB%2Bm36NfsOF0R6DCqWtzM4wVDBrmHb3fsowU8kX14KUsbP2FayPco0Iv%2BejSn6AAZLFWBKgH2NsA%3D%3D";
+	public static final String SERVICEKEY2="0W24KI3V468HM929";
 	
 	// json형식으로 대기오염 OpenAPI 활용
 	@ResponseBody
@@ -102,35 +103,35 @@ public class OpenAPIController {
 					return responseText;
 			
 		}
-		
+		@ResponseBody
+		@RequestMapping(value="jijin", produces="text/xml; charset=UTF-8")
 		public String jijin() throws IOException {
 			
-			String dataName = "데이터명";
-	        String serviceKey = "서비스키";
-	        String pageNo = "1";
-	        String numOfRows = "10";
+	        String numOfRows = "100";
 	        
-	        String url="https://www.safetydata.go.kr/V2/api/DSSP-IF-10944/V2/api/DSSP-IF-10944";
-	        url+="?serviceKey=serviceKey";
+	        String url="https://www.safetydata.go.kr/V2/api/DSSP-IF-10944";
+	        url+="?serviceKey="+SERVICEKEY2;
+	        url+="&numOfRows="+numOfRows;
+	        url+="&returnType=xml";
 
 	        /* API를 호출하기 위한 URL 생성 */
 	        URL requestUrl = new URL(url);
-	        /* API 키 */
-	        /* 페이지 번호 */
-	        /* 페이지당 데이터 수 */
+	        HttpURLConnection urlConn = (HttpURLConnection)requestUrl.openConnection();
+	        urlConn.setRequestMethod("GET");
+	        BufferedReader br = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+			String line;
+			String responseText="";
+			
+			while((line = br.readLine())!=null) { //한줄씩 읽어올 데이터가 있는 동안 반복
+				responseText +=line;
+			}	
+			System.out.println(responseText);
+			br.close();
+			urlConn.disconnect();
+			
+			return responseText;
 
-
-
-
-	        /* API 호출하기 위한 HTTP 커넥션과 리더 생성 */
-	 
-
-	        /* API 호출 */
-
-
-	        /* API 응답에서 데이터 추출 */
 	
-	        return "";
 	        
 	    
 		}

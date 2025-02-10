@@ -144,7 +144,7 @@
 						//3. 만들어낸 요소를 화면에 출력
 						 $("#result1 > tbody").html(value);
 					},
-					eerror : function(){console.log("통신 에러")}
+					error : function(){console.log("통신 에러")}
 				}) 
 				
 			})
@@ -153,8 +153,7 @@
 	
 	
 	<hr>
-   
-   <h1>실시간 지진해일 긴급대피장소</h1>
+<h1>실시간 지진해일 긴급대피장소</h1>
    
    <button id="btn2">실시간 지진해일 대피소 정보</button>
    <br><br>
@@ -162,19 +161,55 @@
    <table border="1" id="result2">
       <thead>
          <tr>
-            <th>시도명</th>
-            <th>시군구명</th>
-            <th>대피지구명</th>
+            <th>대피지구일련번호</th>
+            <th>지역코드</th>
             <th>대피장소명</th>
-            <th>주소</th>
-            <th>경도</th>
-            <th>위도</th>
-            <th>수용가능인원수</th>
-            <th>대피소 분류명</th>
+            <th>수용인원</th>
+            <th>해발고도</th>
+            <th>사용여부</th>
+            <th>도로명상세주소</th>
+            <th>도로명주소코드</th>
+            <th>대피장소상세위치</th>
          </tr>
       </thead>
       <tbody></tbody>
    </table>
+   
+   <script>
+		$(function(){
+			$("#btn2").click(function(){
+				$.ajax({
+					url : "jijin",
+					success : function(data){
+						console.log(data)
+						
+						const itemArr = $(data).find("item")
+						
+						let value="";
+						itemArr.each(function(index, item){
+
+							value +="<tr>"+
+							"<td>"+$(item).find("SHNTDTR_SN").text() +"</td>"+
+							"<td>"+$(item).find("ARCD").text() +"</td>"+
+							"<td>"+$(item).find("SHNT_PLACE_NM").text() +"</td>"+
+							"<td>"+$(item).find("PSBL_NMPR").text() +"</td>"+
+							"<td>"+$(item).find("EV_ANTCTY").text() +"</td>"+
+							"<td>"+$(item).find("USE_AT").text() +"</td>"+
+							"<td>"+$(item).find("RN_DTL_ADRES").text() +"</td>"+
+							"<td>"+$(item).find("RDNMADR_CD").text() +"</td>"+
+							"<td>"+$(item).find("SHNT_PLACE_DTL_POSITION").text() +"</td>"+
+							"</tr>";
+						})
+						
+						//3. 만들어낸 요소를 화면에 출력
+						 $("#result2 > tbody").html(value);
+					},
+					error : function(){console.log("통신 에러")}
+				}) 
+				
+			})
+		})
+	</script>
 
 공공데이터사이트에 행정안전부_지진해일 긴급대피장소 검색 후 xml 방식으로 진행
 	
