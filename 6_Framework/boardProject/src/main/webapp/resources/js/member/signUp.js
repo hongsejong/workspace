@@ -188,9 +188,9 @@ sendAuthKeyBtn.addEventListener("click", function(){
 
     if(checkObj.memberEmail){ // 중복이 아닌 이메일인 경우
 
-        if(authTimer){
-            clearInterval(authTimer);
-        }
+      
+            clearInterval(authTimer); //기존 타이머 삭제
+       
 
 
 
