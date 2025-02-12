@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import edu.kh.project.board.model.dao.BoardDAO;
 import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.dto.Pagination;
+import edu.kh.project.member.model.dto.Member;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -56,5 +57,48 @@ public class BoardServiceImpl implements BoardService{
 		
 		
 	}
+
+
+//게시글 상세 조회
+	@Override
+	public Board selectBoard(Map<String, Object> map) {
+		return dao.selectBoard(map);
+	}
+
+
+/*
+	@Override
+	public int boardLikeCheck(int boardNo, Member loginMember) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("memberNo", loginMember.getMemberNo());
+		
+		int result=dao.boardLikeCheck(map);
+		return result;
+	}
+	*/
+
+
+ //좋아요 여부 확인
+	@Override
+	public int boardLikeCheck(Map<String, Object> map) {
+		return dao.boardLikeCheck(map);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

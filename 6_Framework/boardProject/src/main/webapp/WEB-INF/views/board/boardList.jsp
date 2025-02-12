@@ -67,8 +67,8 @@
                                             <c:if test="${!empty board.thumbnail}">
                                                 <img class="list-thumbnail" src="${board.thumbnail}">
                                             </c:if> 
-    
-                                            <a href="#">${board.boardTitle}</a>   
+    										<%-- ${boardCode} : @Pathvariable로 request scope에 추가된 값 --%>
+                                            <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}">${board.boardTitle}</a>   
                                             [${board.commentCount}]                        
                                         </td>
                                         <td>${board.memberNickname}</td>
@@ -114,7 +114,7 @@
     
                         <c:if test="${pagination.currentPage != i}">
                             <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="#">${i}</a></li>
+                            <li><a href="/board/${boardCode}?cp=${i}">${i}</a></li>
                         </c:if>
                         
                     </c:forEach>
