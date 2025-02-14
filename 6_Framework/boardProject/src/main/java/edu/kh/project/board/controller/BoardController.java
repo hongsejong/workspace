@@ -199,7 +199,7 @@ public class BoardController {
 						//수명 지정
 											//싱글톤 패턴
 						Calendar cal = Calendar.getInstance();
-						cal.add(cal.DATE, 1);
+						cal.add(Calendar.DATE, 1);
 						
 						//날짜 표기법 변경 객체
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

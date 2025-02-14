@@ -135,7 +135,16 @@
                         <article class="login-area">
 
                             <a href="/myPage/info">
-                                <img src="/resources/images/user.png" id="memberProfile">
+                                <!--프로필 이미지가 있는 경우-->
+                        <c:if test="${!empty loginMember.profileImage}">
+                            <img src="${loginMember.profileImage}" id="memberProfile">
+
+                        </c:if>
+                        <!--프로필 이미지가 없는 경우-->
+                        <c:if test="${empty loginMember.profileImage}">
+
+                            <img src="/resources/images/user.png" id="memberProfile">
+                        </c:if>
                             </a>
 
                             <div class="my-info">
