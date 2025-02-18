@@ -60,3 +60,31 @@ boardLike.addEventListener("click", e=>{
     })
 
 })
+
+//-----------------------------
+//게시글 수정
+
+const updateBtn = document.getElementById("updateBtn");
+
+updateBtn.addEventListener("click",()=>{
+    location.href = location.pathname.replace('board','board2')
+                    +"/update"+location.search;
+})
+
+
+
+//게시글 삭제
+
+//"정말로 삭제하시겠습니까?" -> 확인 클릭 시
+const deleteBtn= document.getElementById("deleteBtn");
+
+deleteBtn.addEventListener("click",function(){
+    if(confirm("정말로 삭제하시겠습니까?")){
+        location.href = location.pathname.replace('board','board2')
+                    +"/delete"+location.search;
+    }
+})
+// /board2/1/1500/delete(get)
+
+//삭제 서비스 호출 성공 시 ->해당 게시판 목록으로 이동 "삭제되었습니다." 알림창 출력
+//삭제 서비스 호출 실패 시 ->해당 게시글 상세조회 화면 "게시글 삭제 실패" 알림창 출력 

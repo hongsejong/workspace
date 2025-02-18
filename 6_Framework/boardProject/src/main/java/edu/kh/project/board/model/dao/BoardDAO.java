@@ -114,4 +114,10 @@ public class BoardDAO {
 	public int updateReadCount(int boardNo) {
 		return sqlSession.update("boardMapper.updateReadCount",boardNo);
 	}
+
+
+
+	public int deleteBoard(Board board) {
+		return sqlSession.update("boardMapper.deleteBoard",board);
+	}
 }

@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService{
 		//1.특정 게시판의 삭제되지 않은 게시글 수 조회
 		
 		int listCount = dao.getListCount(boardCode);
-		System.out.println(listCount);
+//		System.out.println(listCount);
 		
 		//2.1번의 조회 결과 + cp를 이용해서 Pagination 객체 생성
 		// -> 내부 필드에 게산된 값 초기화됨
@@ -45,7 +45,7 @@ public class BoardServiceImpl implements BoardService{
 		// 	 게시글 몇 개(pagination.limit) 조회
 		
 		List<Board> boardList= dao.selectBoardList(boardCode,pagination);
-		System.out.println(boardList);
+//		System.out.println(boardList);
 		//.pagination,boardList를 Map에 담아서 반환
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -117,6 +117,13 @@ public class BoardServiceImpl implements BoardService{
 	public int updateReadCount(int boardNo) {
 		return dao.updateReadCount(boardNo);
 	}
+
+
+
+
+
+
+
 
 
 

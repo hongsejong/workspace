@@ -697,4 +697,42 @@ SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME, '원본명' IMG_ORIGI
 FROM DUAL;
 
 
+SELECT * FROM BOARD ;
+SELECT * FROM BOARD_IMG ;
 
+--게시판 수정
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+--게시판 이미지 삭제
+		<delete id="deleteBoardImg">
+		DELETE FROM BOARD_IMG
+		WHERE IMG_NO = #{imageNo} AND IMG_ORDER IN (${deleteList})
+	</delete>
+--게시판 이미지 수정
+		<update id="updateBoardImg">
+		UPDATE BOARD_IMG
+		SET IMG_ORIGINAL = #{imageOriginal},
+			IMG_RENAME = #{imageReName}
+		WHERE  IMG_ORDER = #{imageOrder}
+	</update>
+	;
+	
+SELECT * FROM BOARD 
+ORDER BY 4 DESC;
+
+
+
+UPDATE BOARD
+SET BOARD_DEL_FL ='Y'
+WHERE BOARD_NO=#{boardNo};
+
+SELECT IMG_ORDER FROM BOARD_IMG 
+WHERE BOARD_NO = 1498;
+
+SELECT COUNT(*) FROM BOARD_IMG 
+WHERE BOARD_NO=1515
+AND IMG_ORDER IN (1);
