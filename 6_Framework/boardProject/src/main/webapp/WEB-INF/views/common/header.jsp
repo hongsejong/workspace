@@ -41,7 +41,7 @@
                     -->
                     <input type="search" name="query" id="query"
                     placeholder="검색어를 입력해주세요."
-                    autocomplete="off">
+                    autocomplete="off" value="${param.query}">
 
                     <!-- 검색 버튼 -->
                     <!-- button type="submit" 이 기본값 -->

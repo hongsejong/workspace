@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.Session;
+import javax.management.Query;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,19 +76,35 @@ public class BoardController {
 	@GetMapping("/{boardCode}")
 	public String selectBoardList(@PathVariable("boardCode") int boardCode
 			,@RequestParam(value="cp",required=false,defaultValue="1") int cp
-			,Model model) {
+			,Model model
+			,@RequestParam Map<String, Object> paramMap // 전달받은 파라미터들
+			) {
 		
 		//boardCode 확인
 		//System.out.println("boardCode:"+boardCode);
 		
 		
-		//게시글 목록 조회 서비스 호출
-		Map<String, Object> map = service.selectBoardList(boardCode,cp);
+
+		if(paramMap.get("key")==null) { 	//검색어가 없을 경우
+			//게시글 목록 조회 서비스 호출
+			Map<String, Object> map = service.selectBoardList(boardCode,cp);
+			
+			// 조회 결과를 request scope에 세팅 후 forward
+			model.addAttribute("map",map);
+			
+		}else { //검색어가 있을 경우
+			
+			paramMap.put("boardCode",boardCode);
+			
+			Map<String, Object> map = service.selectBoardList(paramMap,cp);
+			
+			model.addAttribute("map",map);
+			
+		}
+		
+		
 		
 
-		// 조회 결과를 request scope에 세팅 후 forward
-		model.addAttribute("map",map);
-		
 		return "board/boardList";
 	}
 	

@@ -120,4 +120,30 @@ public class BoardDAO {
 	public int deleteBoard(Board board) {
 		return sqlSession.update("boardMapper.deleteBoard",board);
 	}
+
+
+
+	/** 게시글 수 조회(검색)
+	 * @param paramMap
+	 * @return listCount
+	 */
+	public int getListCount(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("boardMapper.getSearchListCount",paramMap);
+	}
+
+
+
+	/** 게시글 목록 조회(검색)
+	 * @param paramMap
+	 * @param pagination
+	 * @return boardList
+	 */
+	public List<Board> selectBoardList(Map<String, Object> paramMap, Pagination pagination) {
+		int offset = (pagination.getCurrentPage()-1 )* pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,pagination.getLimit());
+		
+		
+		return sqlSession.selectList("boardMapper.selectSearchBoardList", paramMap, rowBounds);
+	}
 }
