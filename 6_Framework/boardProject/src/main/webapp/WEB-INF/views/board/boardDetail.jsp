@@ -192,6 +192,7 @@
         const loginMemberNo = "${loginMember.memberNo}";
 
         const boardNo = "${board.boardNo}";
+        const boardCode = "${boardCode}";
 
     </script>
 

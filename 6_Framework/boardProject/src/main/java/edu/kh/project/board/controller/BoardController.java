@@ -272,6 +272,41 @@ public class BoardController {
 	}
 	
 	
+	//게시글 통합검색
+	@GetMapping("/search")
+	public String searchList(@RequestParam(value="cp",required=false,defaultValue="1") int cp
+			,Model model
+			,@RequestParam Map<String, Object> paramMap // 전달받은 파라미터들
+			) {
+		
+		
+			Map<String, Object> map = service.selectBoardList(paramMap,cp);
+			
+			// 조회 결과를 request scope에 세팅 후 forward
+			
+			
+			model.addAttribute("map",map);
+			
+		
+		
+		return "board/boardSearchList";
+	}
+	
+	//게시글 자동완성
+	@GetMapping("/autocomplete")
+	@ResponseBody
+	public Map<String, Object> autocomplete(Model model
+			,@RequestParam Map<String, Object> paramMap) {
+		
+		System.out.println(paramMap);
+		Map<String, Object> map = service.autocomplete(paramMap);
+		
+		
+		return map;
+	}
+	
+
+	
 	
 	
 	

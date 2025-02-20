@@ -19,6 +19,15 @@
     <c:set var="qs" value="&key=${param.key}&query=${param.query}"/>
 </c:if>
 
+<!--통합 검색인 경우-->
+<c:if test="${param.key=='all'}">
+    <c:set var="url" value="/board/search" />
+</c:if>
+
+<c:if test="${param.key!='all'}">
+    <c:set var="url" value="/board/${boardCode}" />
+</c:if>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,10 +46,9 @@
         
         <section class="board-list">
 
-            <h1 class="board-name">${boardName}</h1>
-            <c:if test="${!empty param.query}">
-                <h3 style="margin:30px">"${param.query}" 검색 결과</h3>
-            </c:if>
+            <h1 class="board-name"><span style="color: #455ba8;">"${param.query}"</span>통합 검색 결과  (${pagination.listCount}건)</h1>
+     
+         
 
 
             <div class="list-wrapper">
@@ -75,8 +83,8 @@
                                             <c:if test="${!empty board.thumbnail}">
                                                 <img class="list-thumbnail" src="${board.thumbnail}">
                                             </c:if> 
-    										<%-- ${boardCode} : @Pathvariable로 request scope에 추가된 값 --%>
-                                            <a href="/board/${boardCode}/${board.boardNo}?cp=${pagination.currentPage}${qs}">${board.boardTitle}</a>   
+    										
+                                            <a href="/board/${board.boardCode}/${board.boardNo}?cp=${pagination.currentPage}${qs}">${board.boardTitle}</a>   
                                             [${board.commentCount}]                        
                                         </td>
                                         <td>${board.memberNickname}</td>
@@ -102,59 +110,45 @@
             </div>
 
 
+      
             <div class="pagination-area">
+                <!-- 전체 게시글의 수가 목록에 보여질 수(10개) 보다 큰 경우 페이지 네이션 생성 -->
+                <c:if test="${pagination.listCount > pagination.limit}">
 
-
-                <ul class="pagination">
-                
-                    <!-- 첫 페이지로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=1${qs}">&lt;&lt;</a></li>
-
-                    <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.prevPage}${qs}">&lt;</a></li>
-
-               
-                    <!-- 특정 페이지로 이동 -->
-                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
-
-                        <c:if test="${pagination.currentPage == i}">
-                            <!-- 현재 보고있는 페이지 -->
-                            <li><a class="current">${i}</a></li>
-                        </c:if>
-    
-                        <c:if test="${pagination.currentPage != i}">
-                            <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="/board/${boardCode}?cp=${i}${qs}">${i}</a></li>
-                        </c:if>
-                        
-                    </c:forEach>
+                    <ul class="pagination">
                     
-                    <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.nextPage}${qs}">&gt;</a></li>
-
-                    <!-- 끝 페이지로 이동 -->
-                    <li><a href="/board/${boardCode}?cp=${pagination.maxPage}${qs}">&gt;&gt;</a></li>
-
-                </ul>
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a href="${url}?cp=1${qs}">&lt;&lt;</a></li>
+    
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="${url}?cp=${pagination.prevPage}${qs}">&lt;</a></li>
+    
+                   
+                        <!-- 특정 페이지로 이동 -->
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+    
+                            <c:if test="${pagination.currentPage == i}">
+                                <!-- 현재 보고있는 페이지 -->
+                                <li><a class="current">${i}</a></li>
+                            </c:if>
+        
+                            <c:if test="${pagination.currentPage != i}">
+                                <!-- 현재 페이지를 제외한 나머지 -->
+                                <li><a href="${url}?cp=${i}${qs}">${i}</a></li>
+                            </c:if>
+                            
+                        </c:forEach>
+                        
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="${url}?cp=${pagination.nextPage}${qs}">&gt;</a></li>
+    
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="${url}?cp=${pagination.maxPage}${qs}">&gt;&gt;</a></li>
+    
+                    </ul>
+                </c:if>
             </div>
 
-
-         <!-- 검색창 -->
-            <form action="${boardCode}" method="get" id="boardSearch">
-
-                <select name="key" id="searchKey">
-                    <option value="t">제목</option>
-                    <option value="c" >내용</option>
-                    <option value="tc">제목+내용</option>
-                    <option value="w">작성자</option>
-                </select>
-
-                <!--param.query 도 가능-->
-                <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요."
-                >
-
-                <button>검색</button>
-            </form>
 
 
 

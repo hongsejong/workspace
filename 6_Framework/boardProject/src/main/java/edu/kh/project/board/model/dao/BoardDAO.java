@@ -144,6 +144,12 @@ public class BoardDAO {
 		RowBounds rowBounds = new RowBounds(offset,pagination.getLimit());
 		
 		
-		return sqlSession.selectList("boardMapper.selectSearchBoardList", paramMap, rowBounds);
+		return sqlSession.selectList("boardMapper.searchBoardList", paramMap, rowBounds);
+	}
+
+
+
+	public List<Board> autocomplete(Map<String, Object> paramMap) {
+		return sqlSession.selectList("boardMapper.autocomplete",paramMap);
 	}
 }

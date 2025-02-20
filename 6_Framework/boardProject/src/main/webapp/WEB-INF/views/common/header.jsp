@@ -29,7 +29,7 @@
                 - POST : input태그 값을 주소에 담지 않고 제출(주소에 안보임)
                         -> HTTP Body에 담아서 제출
             -->
-            <form action="#" method="GET">
+            <form action="/board/search" method="GET">
 
                 <fieldset> <!-- form태그 내 영역 구분 -->
 
@@ -42,6 +42,10 @@
                     <input type="search" name="query" id="query"
                     placeholder="검색어를 입력해주세요."
                     autocomplete="off" value="${param.query}">
+              
+
+                    <!-- 통합 (제목) 제목 검색-->
+                    <input type="hidden" name="key" value="all">
 
                     <!-- 검색 버튼 -->
                     <!-- button type="submit" 이 기본값 -->
@@ -50,10 +54,17 @@
                 </fieldset>
 
             </form>
+         
 
+                <div id="autocomplete">
+                    
+                </div>
+         
+            
         </article>
-
+        
     </section>
+
 
 
     <section></section>
@@ -82,6 +93,7 @@
             </c:otherwise>
         </c:choose>
     </div>
+    
 </header>
 
 <nav>
@@ -102,3 +114,4 @@
         
     </ul>
 </nav>
+<script src="/resources/js/header.js"></script>
