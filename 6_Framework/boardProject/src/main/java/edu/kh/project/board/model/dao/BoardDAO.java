@@ -148,7 +148,8 @@ public class BoardDAO {
 	}
 
 
-
+	/*자동완성
+	 * */
 	public List<Board> autocomplete(Map<String, Object> paramMap) {
 		return sqlSession.selectList("boardMapper.autocomplete",paramMap);
 	}
