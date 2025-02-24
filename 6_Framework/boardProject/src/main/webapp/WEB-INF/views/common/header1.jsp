@@ -4,8 +4,7 @@
 <link rel="stylesheet" href="/resources/css/main-style.css">
 
 <!-- font awesome 라이브러리 추가 + key 등록 -->
-<script src="https://kit.fontawesome.com/385a4842a7.js" crossorigin="anonymous"></script>
-<script src="/resources/js/header.js"></script>
+<script src="https://kit.fontawesome.com/9d18722475.js" crossorigin="anonymous"></script>
 
 
 <header>
@@ -43,8 +42,9 @@
                     <input type="search" name="query" id="query"
                     placeholder="검색어를 입력해주세요."
                     autocomplete="off" value="${param.query}">
+              
 
-                    <!-- 통합(제목) 검색 -->
+                    <!-- 통합 (제목) 제목 검색-->
                     <input type="hidden" name="key" value="all">
 
                     <!-- 검색 버튼 -->
@@ -54,55 +54,64 @@
                 </fieldset>
 
             </form>
+         
 
-            <ul id="searchResult" class="close"></ul>
-
+                <div id="autocomplete">
+                    
+                </div>
+         
+            
         </article>
-
+        
     </section>
+
 
 
     <section></section>
     
     <!-- 우측 상단 드롭다운 메뉴 -->
-    
+
     <div class="header-top-menu">
-       <c:choose>
-          <c:when test="${empty loginMember}">
-             <!-- 로그인 X -->
-             <a href="/">메인 페이지</a> | <a href="/member/login">로그인</a>
-          </c:when>
-          <c:otherwise>
-             <!-- 로그인 O -->
-             <label for="headerMenuToggle">
-                닉네임 <i class="fa-solid fa-caret-down"></i>
-             </label>
-             
-             <input type="checkbox" id="headerMenuToggle">
-             
-             <div class="header-menu">
-                <a href="/myPage/info">내정보</a>
-                <a href="/member/logout">로그아웃</a>
-             </div>
-          
-          </c:otherwise>
-       </c:choose>
+        <c:choose>
+            <c:when test="${empty loginMember}">
+                <!-- 로그인 X -->
+                <a href="/">메인 페이지</a> | <a href="/member/login">로그인</a>
+            </c:when>
+            <c:otherwise>
+                <!-- 로그인 O -->
+                 <label for="headerMenuToggle">
+                    닉네임<i class="fa-solid fa-caret-down"></i>
+                </label>
+
+                <input type="checkbox" id="headerMenuToggle">
+
+                <div class="header-menu">
+                    <a href="/myPage/info">내정보</a>
+                    <a href="/member/logout">로그아웃</a>
+                </div>
+
+            </c:otherwise>
+        </c:choose>
     </div>
+    
 </header>
 
 <nav>
     <ul>
-        <!-- <li><a href="#">공지사항</a></li>
+        <!--
+        <li><a href="#">공지사항</a></li>
         <li><a href="#">자유 게시판</a></li>
         <li><a href="#">질문 게시판</a></li>
         <li><a href="#">FAQ</a></li>
-        <li><a href="#">1:1문의</a></li> -->
+        <li><a href="#">1:1문의</a></li>
+        -->
 
         <c:forEach var="boardType" items="${boardTypeList}">
             <li><a href="/board/${boardType.BOARD_CODE}">${boardType.BOARD_NAME}</a></li>
         </c:forEach>
 
+        
+        
     </ul>
 </nav>
-
-
+<script src="/resources/js/header.js"></script>

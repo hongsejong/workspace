@@ -1,52 +1,120 @@
-console.log("헤더연결");
+// 문서가 모두 로딩된 후 수행
 
-const query = document.getElementById("query")
-const autocomplete=document.getElementById("autocomplete")
+document.addEventListener("DOMContentLoaded", () => {
 
-query.addEventListener("input",function(){
 
-    if(query.value==""){
-        autocomplete.innerHTML=""
-        autocomplete.style.display = "none";
-        return;
+    const query = document.querySelector("#query"); // 헤더 검색창
+
+
+    const searchResult = document.querySelector("#searchResult"); // 검색창 자동 완성 영역
+
+
+
+
+    query.addEventListener("input", e => {
+
+
+        if(query.value.trim().length > 0){ // 입력된 내용이 있을 때
+            fetch("/board/headerSearch?query=" + query.value.trim())
+            .then(resp => resp.json())
+            .then(list => {
+                console.log(list);
+
+
+                if(list.length > 0){ // 검색 결과가 있을 때
+                    searchResult.classList.remove("close");
+                   
+                    // BOARD_NO, BOARD_TITLE, READ_COUNT, BOARD_CODE, BOARD_NAME
+
+
+                    searchResult.innerHTML = ""; // 이전 검색 내역 삭제
+
+
+                    for(let map of list){
+                        const li = document.createElement("li");
+                        li.setAttribute("path", `${map.BOARD_CODE}/${map.BOARD_NO}`);
+
+
+
+
+                        const a = document.createElement("a");
+
+
+                        map.BOARD_TITLE = map.BOARD_TITLE.replace(query.value, `<mark>${query.value}</mark>`);
+                        map.BOARD_TITLE = `<b>${map.BOARD_TITLE}</b>`;
+
+
+                        a.innerHTML = `${map.BOARD_TITLE} - ${map.BOARD_NAME}`;
+                       
+                        a.setAttribute("href", "#");
+
+
+                        a.addEventListener("click", e => {
+                            e.preventDefault();
+                           
+                            const path = e.currentTarget.parentElement.getAttribute("path");
+
+
+                            location.href = "/board/" + path;
+                           
+
+
+                        });
+
+
+                        li.append(a)
+                        searchResult.append(li);
+
+
+
+
+                    }
+
+
+                }else{ // 검색 결과가 없다면
+                    searchResult.classList.add("close");
+                }
+            })
+            .catch(err => console.log(err));
+
+
+
+
+        }else{ // 입력된 내용이 없을 때
+            searchResult.classList.add("close");
+        }
+
+
+
+
+    })
+   
+});
+
+
+
+
+document.addEventListener("click", e => {
+    const elementList = document.querySelectorAll(".search-area, .search-area *");
+    const searchResult = document.querySelector("#searchResult"); // 검색창 자동 완성 영역
+
+
+    let flag = true;
+    for(let element of elementList){
+
+
+        if(element == e.target){
+           
+            flag = false;
+            break;
+        }
     }
 
-    const searchText = query.value.trim();
 
-    fetch(`/board/autocomplete?query=${searchText}`)
-        .then(response => response.json()) 
-        .then(data => {
-            autocomplete.innerHTML = '';
-
+    if(flag){
+        searchResult.classList.add("close");
+        // searchResult.innerHTML = "";
+    }
 
 
-            autocomplete.style.display = "block";
-            for(let i=0; i<10; i++){
-                
-                let boardName=data.boardList[i].boardName
-                let boardTitle=data.boardList[i].boardTitle
-                let boardCode=data.boardList[i].boardCode
-                let boardNo=data.boardList[i].boardNo
-                console.log(boardName)
-                console.log(boardTitle)
-
-                const highlightedTitle = boardTitle.replace(new RegExp(searchText), (match) => `<span style="background-color: yellow;">${match}</span>`);
-                const highlightedName = boardName.replace(new RegExp(searchText), (match) => `<span style="background-color: yellow;">${match}</span>`);
-              
-
-                const li= document.createElement("li");
-                const a= document.createElement("a");
-                a.innerHTML = `<span style="font-weight: bold;">${highlightedTitle}</span> - <span>${highlightedName}</span>`;
-                a.setAttribute("href", `/board/${boardCode}/${boardNo}`);
-                li.append(a)
-                autocomplete.append(li)
-                
-            }
-  
-       
-           
-        
-        })
-        .catch(err => console.log(err)) //예외 처리
-    
-})
+});
