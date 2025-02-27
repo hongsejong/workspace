@@ -24,7 +24,6 @@
 <body>
     <main>
 
-        ${roomList}
 
 
         <jsp:include page="../common/header.jsp"></jsp:include>
@@ -43,7 +42,7 @@
 
 
             <ul id="resultArea">
-                <li class="result-row" data-id="1">
+                <!-- <li class="result-row" data-id="1">
                     <img class="result-row-img" src="/resources/images/user.png">
                     <span> <mark>유저</mark>일</span>
                 </li>
@@ -53,7 +52,7 @@
                 </li>
 
 
-                <li class="result-row">일치하는 회원이 없습니다</li>
+                <li class="result-row">일치하는 회원이 없습니다</li> -->
             </ul>
         </div>
    
@@ -128,7 +127,10 @@
     
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
    
-
+    <script>
+        //로그인한 회원 번호
+        const loginMemberNo = "${loginMember.memberNo}";
+    </script>
 
     <script src="/resources/js/chatting/chatting.js"></script>
 </body>
