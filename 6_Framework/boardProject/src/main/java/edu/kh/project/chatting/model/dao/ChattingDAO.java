@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.kh.project.chatting.model.dto.ChattingRoom;
+import edu.kh.project.chatting.model.dto.Message;
 import edu.kh.project.member.model.dto.Member;
 
 @Repository
@@ -82,6 +83,35 @@ public class ChattingDAO {
 	 */
 	public int updateReadFlag(Map<String, Object> paramMap) {
 		return sqlSession.update("chattingMapper.updateReadFlag",paramMap);
+	}
+
+
+
+	/** 채팅방 메세지 목록 조회
+	 * @param chattingNo
+	 * @return
+	 */
+	public List<Message> selectMessageList(int chattingNo) {
+		return sqlSession.selectList("chattingMapper.selectMessageList",chattingNo);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	/** 메세지 삽입
+	 * @param msg
+	 * @return result
+	 */
+	public int insertMessage(Message msg) {
+		return sqlSession.insert("chattingMapper.insertMessage",msg);
 	}
 	
 	
