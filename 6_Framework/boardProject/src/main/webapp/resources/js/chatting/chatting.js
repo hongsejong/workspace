@@ -523,7 +523,8 @@ function clickFirstChatItem() {
 document.addEventListener("DOMContentLoaded", ()=>{
     //채팅방 목록에 클릭 이벤트 추가
     roomListAddEvent();
-    clickFirstChatItem()
+    clickFirstChatItem();
+    inputChatting.focus();
 
     //보내기 버튼에 클릭 이벤트 추가
     send.addEventListener('click', sendMessage);
