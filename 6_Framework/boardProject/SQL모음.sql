@@ -9,6 +9,18 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO project;
 -- 객체 생성 공간 할당
 ALTER USER project DEFAULT TABLESPACE SYSTEM
 QUOTA UNLIMITED ON SYSTEM;
+-----------------------------아래는 프로젝트 -----------------
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+
+-- 계정 생성
+CREATE USER haezo IDENTIFIED BY "haezo1234";
+
+-- 권한 부여
+GRANT CONNECT, RESOURCE, CREATE VIEW TO haezo;
+
+-- 객체 생성 공간 할당
+ALTER USER haezo DEFAULT TABLESPACE SYSTEM
+QUOTA UNLIMITED ON SYSTEM;
 
 ------------------------------------------------------------
 
