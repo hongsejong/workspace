@@ -406,7 +406,7 @@ const sendMessage = () =>{
             "senderNo" : loginMemberNo,
             'targetNo' : selectTargetNo,
             chattingNo : selectChattingNo,
-            messageContent : inputChatting.value
+            messageContent :inputChatting.value
         };
         console.log(obj);
 
@@ -414,10 +414,8 @@ const sendMessage = () =>{
         chattingSock.send( JSON.stringify(obj) );
 
         
-
        
-        const content = `<strong>${loginMemberNickname}</strong>님이  채팅을 보냈습니다. <br>${inputChatting.value}`;
-
+        const content=`<strong>${loginMemberNickname}</strong>님이  채팅을 보냈습니다. \r${inputChatting.value}`;
         const url = `${location.pathname}?chat-no=${selectChattingNo}`;
         console.log(url);
         // type, url,pkNo,content

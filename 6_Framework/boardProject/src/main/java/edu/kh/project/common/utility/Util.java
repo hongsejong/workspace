@@ -30,6 +30,9 @@ public class Util {
 		content = content.replaceAll("<", "&lt");
 		content = content.replaceAll(">", "&gt");
 		content = content.replaceAll("\"", "&quot");
+		content = content.replaceAll("&ltstrong&gt", "<strong>");
+		content = content.replaceAll("&lt/strong&gt", "</strong>");
+		content = content.replaceAll("\r", "<br>");
 		
 		
 		return content;
