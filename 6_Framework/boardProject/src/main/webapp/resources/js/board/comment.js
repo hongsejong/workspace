@@ -170,14 +170,28 @@ addComment.addEventListener("click", e => { // 댓글 등록 버튼이 클릭이
         })
     })
     .then(resp => resp.json())
-    .then(result => {
-        if(result > 0){ // 등록 성공
+    .then(commentNo => {
+        if(commentNo > 0){ // 등록 성공
             alert("댓글이 등록되었습니다.");
 
             commentContent.value = ""; // 작성했던 댓글 삭제
 
             selectCommentList(); // 비동기 댓글 목록 조회 함수 호출
             // -> 새로운 댓글이 추가되어짐
+
+        //댓글을 작성 한 경우
+        //게시글 작성자에게 알림 전송
+
+        //알림 클릭 시 작성된 댓글 위치로 바로 이동
+        //->url에 댓글 번호 추가(?cn=댓글번호)
+            const content = `<strong>${memberNickname}</strong>님이 <strong>${boardTitle}</strong> 게시글에 댓글을 작성했습니다.`;
+            // type, url,pkNo,content
+                sendNotification(
+                    "insertComment",
+                    `${location.pathname}?cn=${commentNo}`, // 게시글 상세조회 페이지 주소
+                    boardNo,
+                    content
+                );
 
         } else { // 실패
             alert("댓글 등록에 실패했습니다...");
@@ -451,10 +465,21 @@ function insertChildComment(parentNo, btn){
         body: JSON.stringify(data)
     })
     .then(resp => resp.json())
-    .then(result => {
-        if(result > 0){ // 등록 성공
+    .then(commentNo => {
+        if(commentNo > 0){ // 등록 성공
             alert("답글이 등록되었습니다.");
             selectCommentList(); // 비동기 댓글 목록 조회 함수 호출
+
+            //답글(대댓글)을 작성한 경우
+            // 부모 댓글 작성자에게 OOO님이 답글을 작성했습니다. 알림 전송
+        const content = `<strong>${memberNickname}</strong>님이  답글을 작성했습니다.`;
+        // type, url,pkNo,content
+            sendNotification(
+                "insertChildComment",
+                `${location.pathname}?cn=${commentNo}`, 
+                parentNo,
+                content
+            );
 
         } else { // 실패
             alert("답글 등록에 실패했습니다...");

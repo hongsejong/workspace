@@ -6,9 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -120,5 +123,23 @@ public class SseController {
 		return service.notReadCheck(memberNo);
 		
 	}
+	
+	
+	/** 알림 삭제
+	 * @param notificationNo
+	 */
+	@DeleteMapping("/notification")
+	public void deleteNotification(@RequestBody int notificationNo) {
+		
+		
+		service.deleteNotification(notificationNo);
+	}
+	
+	@PutMapping("/notification")
+	public void readNotification(@RequestBody int notificationNo) {
+		service.readNotification(notificationNo);
+	}
+	
+	
 
 }

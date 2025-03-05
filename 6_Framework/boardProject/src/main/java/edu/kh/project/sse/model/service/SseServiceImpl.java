@@ -31,6 +31,16 @@ public class SseServiceImpl implements SseService{
 		if(result >0) {
 			// 알림을 받아야 하는 회원 번호 + 안읽은 알림 개수 조회
 			map = dao.selectReceiveMember(notification.getNotificationNo());
+			
+			//채팅 알림인 경우 채팅방번호,알림번호 추가
+			if(notification.getNotificationType().equals("chatting")) {
+				String url = notification.getNotificationUrl();
+				String[] arr = url.split("chat-no=");
+				String chatNo= arr[arr.length-1];
+
+				map.put("chattingRoomNo", chatNo); //채팅방 번호
+				map.put("notificationNo", notification.getNotificationNo()); //알림번호
+			}
 		}
 		
 		
@@ -48,6 +58,24 @@ public class SseServiceImpl implements SseService{
 	@Override
 	public int notReadCheck(int memberNo) {
 		return dao.notReadCheck(memberNo);
+	}
+	
+	
+	
+	
+	//알림 삭제
+	@Override
+	public void deleteNotification(int notificationNo) {
+		 dao.deleteNotification(notificationNo);
+	}
+	
+	
+	
+	//읽음처리
+	@Override
+	public void readNotification(int notificationNo) {
+		dao.readNotification(notificationNo);
+		
 	}
 
 }

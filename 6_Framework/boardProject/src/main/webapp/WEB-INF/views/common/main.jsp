@@ -134,7 +134,7 @@
                     <c:otherwise>
                         <article class="login-area">
 
-                            <a href="/myPage/info">
+                            <a href="/myPage/profile">
                                 <!--프로필 이미지가 있는 경우-->
                         <c:if test="${!empty loginMember.profileImage}">
                             <img src="${loginMember.profileImage}" id="memberProfile">

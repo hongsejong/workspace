@@ -25,4 +25,14 @@ public interface SseService {
 	 */
 	int notReadCheck(int memberNo);
 
+	/** 알림창 X버튼 클릭시 삭제버튼
+	 * @param notificationNo
+	 */
+	void deleteNotification(int notificationNo);
+
+	/** 알림 읽음기능
+	 * @param notificationNo
+	 */
+	void readNotification(int notificationNo);
+
 }

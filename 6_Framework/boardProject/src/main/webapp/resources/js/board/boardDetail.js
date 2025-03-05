@@ -54,6 +54,20 @@ boardLike.addEventListener("click", e=>{
         e.target.nextElementSibling.innerText=count;
         // document.getElementById("likeCount").innerText=count;
 
+
+        //좋아요를 한 경우
+        //게시글 작성자에게 알림 전송
+        if(check==0){//if시작
+        const content = `<strong>${memberNickname}</strong>님이 <strong>${boardTitle}</strong> 게시글을 좋아합니다.`;
+        // type, url,pkNo,content
+            sendNotification(
+                "boardLike",
+                location.pathname, // 게시글 상세조회 페이지 주소
+                boardNo,
+                content
+            );
+        }//if끝
+
     })
     .catch(err=>{ //예외 발생 시 처리하는 코드
         console.log(err);

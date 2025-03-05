@@ -119,6 +119,7 @@
     <script>
         //로그인한 회원 번호
         const loginMemberNo = "${loginMember.memberNo}";
+        const loginMemberNickname = "${loginMember.memberNickname}"
     </script>
 
     <script src="/resources/js/chatting/chatting.js"></script>

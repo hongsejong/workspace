@@ -47,4 +47,17 @@ public class SseDAO {
 		return sqlSession.selectOne("sseMapper.notReadCheck",memberNo);
 	}
 
+
+
+	public void deleteNotification(int notificationNo) {
+		 sqlSession.delete("sseMapper.deleteNotification",notificationNo);
+	}
+
+
+
+	public void readNotification(int notificationNo) {
+		sqlSession.update("sseMapper.readNotification",notificationNo);
+		
+	}
+
 }

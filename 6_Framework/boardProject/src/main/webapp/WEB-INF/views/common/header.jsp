@@ -105,7 +105,7 @@
           <c:otherwise>
              <!-- 로그인 O -->
              <label for="headerMenuToggle">
-                닉네임 <i class="fa-solid fa-caret-down"></i>
+                ${loginMember.memberNickname} <i class="fa-solid fa-caret-down"></i>
              </label>
              
              <input type="checkbox" id="headerMenuToggle">

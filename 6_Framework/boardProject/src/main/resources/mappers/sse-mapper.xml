@@ -40,6 +40,10 @@
             <when test='notificationType == "insertChildComment"'>
                (SELECT MEMBER_NO FROM "COMMENT" WHERE COMMENT_NO = #{pkNo})
             </when>
+            <!--  알림 종류가 채팅인 경우 -->
+            <when test='notificationType == "chatting"'>
+               #{pkNo}
+            </when>
          
          </choose>
       
@@ -93,6 +97,18 @@
 	AND NOTIFICATION_CHECK='N'
    </select>
    
+   <delete id="deleteNotification">
+   DELETE FROM NOTIFICATION
+	WHERE NOTIFICATION_NO=#{notificationNo}
+   
+   </delete>
+   
+   
+   <update id="readNotification">
+   UPDATE NOTIFICATION SET
+NOTIFICATION_CHECK ='Y'
+WHERE NOTIFICATION_NO=#{notificationNo}
+   </update>
    
 
 	

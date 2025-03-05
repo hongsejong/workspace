@@ -413,7 +413,23 @@ const sendMessage = () =>{
         // JS객체 -> JSON으로 변환하여 전송
         chattingSock.send( JSON.stringify(obj) );
 
-        inputChatting.value=""; // 기존 메세지 내용 삭제
+        
+
+       
+        const content = `<strong>${loginMemberNickname}</strong>님이  채팅을 보냈습니다. <br>${inputChatting.value}`;
+
+        const url = `${location.pathname}?chat-no=${selectChattingNo}`;
+        console.log(url);
+        // type, url,pkNo,content
+            sendNotification(
+                "chatting",
+                url, 
+                selectTargetNo,
+                content
+            );
+            inputChatting.value=""; // 기존 메세지 내용 삭제
+
+
         
     }else{ // 없는 경우
         alert("채팅을 입력해 주세요.");
@@ -505,7 +521,7 @@ chattingSock.onmessage = e=>{
 
 
 
-
+//채팅 클릭함수
 function clickFirstChatItem() {
     
     const firstItem = document.querySelector('.chatting-list li');
@@ -523,11 +539,31 @@ function clickFirstChatItem() {
 document.addEventListener("DOMContentLoaded", ()=>{
     //채팅방 목록에 클릭 이벤트 추가
     roomListAddEvent();
-    clickFirstChatItem();
-    inputChatting.focus();
 
     //보내기 버튼에 클릭 이벤트 추가
     send.addEventListener('click', sendMessage);
+
+    //채팅 알림을 클릭해서 채팅 페이지로 이동한 경우
+    const params =new URLSearchParams(location.search);
+    const chatNo= params.get("chat-no");
+    if(chatNo !=null){
+        const chatItems= document.querySelectorAll(".chatting-item");
+        chatItems.forEach(item => {
+            if(item.getAttribute("chat-no")==chatNo)
+                item.click();
+            return;
+        })
+
+    }else{ // 아닌 경우 == 채팅방 입장 시
+        document.querySelector(".chatting-item")?.click();
+        //채팅방 입장 시 채팅 목록이 존재하는 경우
+    //가장 최근 채팅방에 입장
+    }
+
+    //clickFirstChatItem();
+    
+
+
 
 });
 

@@ -25,9 +25,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-
     })
+
+    //쿼리스트링 중 cn(댓글번호)가 존재하는 경우
+    // 해당 댓글을 찾아 화면을 스크롤해서 이동하기
+    
+    // 쿼리스트링을 다룰 수 있는 객체
+    const params= new URLSearchParams(location.search);
+    const cn = params.get("cn"); // cn 값 얻어오기
+    if(cn != null){ // cn 이 존재하는 경우
+        const targetId= "c" + cn; // "c100" 형태로 변환
+
+        //아이디가 일치하는 요소 얻어오기
+        const target = document.getElementById(targetId);
+ 
+
+        //댓글 요소가 제일 위에서 얼만큼 떨어져 있는지 반환
+
+        const scrollPosition= target.offsetTop;
+        
+
+        //댓글 위치로 스크롤
+        window.scrollTo({
+            top : scrollPosition - 50, // 스크롤 할 길이
+            behavior : "smooth" // 부드럽게 행동(동작)하도록 지정
+                        // instant : 스크롤 즉시 적용
+        })
+        
+    }
+
+ 
+
+
 
 
     //--------------------------------------------
@@ -196,6 +225,26 @@ const connectSse = () => {
 
         const obj = JSON.parse(e.data);
         //console.log(obj) //알림 받는 회원 번호, 읽지 않은 알림 개수
+                            //채팅 알림인 경우 채팅방번호, 알림번호 추가로 얻어옴
+
+        // 채팅 알림을 받았는데 해당 채팅방에 입장한 상태인 경우 알림 X
+        try{
+
+            if(selectChattingNo==obj.chattingRoomNo){
+                fetch("/notification", {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: obj.notificationNo
+                  })
+                  .then(resp => {
+                    if(!resp.ok) throw new Error("채팅 알림 삭제 실패");
+                  })
+                  .catch(err => console.log(err));
+    
+                  return;
+    
+            }
+        }catch(e){}
 
 
         //종 버튼에 색 추가
@@ -206,6 +255,14 @@ const connectSse = () => {
         //알림 개수 표시
         const notificationCountArea = document.querySelector(".notification-count-area");
         notificationCountArea.innerText = obj.notiCount;
+
+        //알림 목록이 열려 있는 경우
+        //알림 목록 비동기 조회
+        const notificationList =document.querySelector('.notification-list');
+        if(notificationList.classList.contains("notification-show")){
+            selectNotificationList();
+        }
+
     })
 
     //----------------------------------------
@@ -282,7 +339,7 @@ const selectNotificationList = () => {
     fetch("/notification")
     .then(resp => resp.json())
     .then(selectList =>{
-        //console.log(selectList);
+        console.log(selectList);
 
         // 이전 알림 목록 삭제
       const notiList = document.querySelector(".notification-list");

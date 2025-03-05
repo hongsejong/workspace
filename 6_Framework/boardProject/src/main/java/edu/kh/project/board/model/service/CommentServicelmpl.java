@@ -33,7 +33,13 @@ public class CommentServicelmpl implements CommentService{
 	public int insert(Comment comment) {
 		//XSS 방지 처리
 		comment.setCommentContent(Util.XSSHandling(comment.getCommentContent()));
-		return dao.insert(comment);
+		
+		int result=dao.insert(comment);
+		
+		//댓글 삽입 성공 시 댓글 번호 반환
+		if(result>0) result=comment.getCommentNo();
+		
+		return result;
 	}
 
 

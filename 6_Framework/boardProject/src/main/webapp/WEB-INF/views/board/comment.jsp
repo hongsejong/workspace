@@ -10,7 +10,7 @@
 
             <!-- 부모/자식 댓글 -->
             <c:forEach items="${board.commentList}" var="comment">
-            <li class="comment-row <c:if test='${comment.parentNo !=0}'>child-comment</c:if>">
+            <li id="c${comment.commentNo}" class="comment-row <c:if test='${comment.parentNo !=0}'>child-comment</c:if>">
                 <p class="comment-writer">
 
 
