@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.kh.project.common.utility.Util;
 import edu.kh.project.sse.model.dao.SseDAO;
 import edu.kh.project.sse.model.dto.Notification;
 
@@ -25,6 +26,8 @@ public class SseServiceImpl implements SseService{
 		Map<String, Object> map = null;
 		
 		//알림 삽입
+		
+		notification.setNotificationContent(Util.XSSHandling(notification.getNotificationContent()));   
 		int result = dao.insertNotification(notification);
 		
 		// 알림 삽입 성공 시
