@@ -6,6 +6,10 @@ import Ex1 from './components/Exam1'; // .js 생략 가능
 import Ex2 from './components/Exam2'; // .js 생략 가능
 import PropsEx from './components/R1_props'; // .js 생략 가능
 import State1 from './components/R2_state1'; // .js 생략 가능
+import State2 from './components/R3_state2'; // .js 생략 가능
+import State3 from './components/R4_state3'; // .js 생략 가능
+import TodoList from './components/R5_todolist'; // .js 생략 가능
+import ContextApi from './components/R6_contextApi'
 
 function App() {
   //리액트의 컴포넌트는 딱 하나의 요소만 반환 가능
@@ -15,7 +19,7 @@ function App() {
     <>
       {/* jsx 주석 */}
 
-      <h1 className='temp' style={ {color : 'red',fontSize : '20px'} }>Hello React</h1>
+      {/* <h1 className='temp' style={ {color : 'red',fontSize : '20px'} }>Hello React</h1> */}
       {/* inline 방식으로 style 추가 시 : style={ {스타일명 : '값' } } */}
       {/* <div>리액트 첫걸음</div> */}
 
@@ -23,7 +27,13 @@ function App() {
       {/* <Ex2 /> */}
       {/* <PropsEx name={'홍길동'}/> */}
       {/* <PropsEx name={'유저일'}/> */}
-      <State1/>
+      {/* <State1/> */}
+      {/* <State2 init={50}/>
+      <hr/>
+      <State3/>
+      <hr/>
+      <TodoList/> */}
+      <ContextApi/>
     </>
   );
 }
