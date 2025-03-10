@@ -726,3 +726,46 @@ WHERE BOARD_CODE =6;
 UPDATE "BOARD" SET BOARD_STATUS ='N'
 WHERE BOARD_CODE =6;
 
+
+DECLARE
+    v_report_board_no NUMBER;
+BEGIN
+    FOR i IN 1..50 LOOP
+        -- 자유게시판(BOARD_CODE = 3)와 의뢰 게시글(REQUEST에 존재하는 BOARD_NO)의 합집합에서 무작위로 하나 선택
+        SELECT board_no
+        INTO v_report_board_no
+        FROM (
+            SELECT board_no 
+            FROM (
+                SELECT board_no FROM board WHERE board_code = 3
+                UNION
+                SELECT board_no FROM request
+            )
+            ORDER BY DBMS_RANDOM.VALUE
+        )
+        WHERE ROWNUM = 1;
+        
+        INSERT INTO "REPORT" (
+            "REPORT_NO",
+            "MEMBER_NO",
+            "BOARD_NO",
+            "REPORT_CONTENT",
+            "REPORT_TITLE",
+            "REPORT_TYPE",
+            "REPORT_RESULT"
+        ) VALUES (
+            NULL,  -- 트리거/시퀀스를 통해 자동 증가
+            TRUNC(DBMS_RANDOM.VALUE(1,51)),  -- 1~50 사이의 임의 회원 번호
+            v_report_board_no,
+            '신고 내용 ' || i,
+            '신고 제목 ' || i,
+            TRUNC(DBMS_RANDOM.VALUE(1,6)),   -- 신고 유형 1~5 중 하나
+            CASE TRUNC(DBMS_RANDOM.VALUE(1,4))
+                WHEN 1 THEN 'A'  -- 처리 전
+                WHEN 2 THEN 'B'  -- 무효
+                WHEN 3 THEN 'C'  -- 글 삭제
+            END
+        );
+    END LOOP;
+    COMMIT;
+END;

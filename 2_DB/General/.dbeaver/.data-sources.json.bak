@@ -214,6 +214,27 @@
 		"oracle_thin-195604e1073-453ce4596aea58eb": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
+			"name": "haezo 사용자 계정",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "1521",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@//localhost:1521/XE",
+				"configurationType": "MANUAL",
+				"home": "C:\\app\\user1\\product\\18.0.0\\dbhomeXE",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SERVICE"
+				},
+				"auth-model": "oracle_native"
+			}
+		},
+		"oracle_thin-1957d9976d1-105a4a612595a8a9": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
 			"name": "localhost",
 			"save-password": true,
 			"configuration": {
