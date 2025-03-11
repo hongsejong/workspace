@@ -24,6 +24,4 @@
         alert('${message}');
     </script>
 
-
-
 </c:if>

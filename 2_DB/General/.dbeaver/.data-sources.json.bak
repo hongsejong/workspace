@@ -235,7 +235,7 @@
 		"oracle_thin-1957d9976d1-105a4a612595a8a9": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
-			"name": "localhost",
+			"name": "todolist 사용자 계정",
 			"save-password": true,
 			"configuration": {
 				"host": "localhost",

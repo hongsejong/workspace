@@ -224,7 +224,8 @@ CREATE TABLE "BOARD" (
 	"BOARD_DEL_FL"	CHAR(1)	DEFAULT 'N'	NOT NULL,
 	"MEMBER_NO"	NUMBER		NOT NULL,
 	"BOARD_CODE"	NUMBER		NULL,
-	"BOARD_STATUS"	VARCHAR2(30)		NULL
+	"BOARD_STATUS"	VARCHAR2(30)		NULL,
+	"PARENT_BOARD_NO"  NUMBER        NULL  -- 추가된 컬럼: 부모 게시글 번호
 );
 COMMENT ON COLUMN "BOARD"."BOARD_NO" IS '게시글 번호';
 COMMENT ON COLUMN "BOARD"."BOARD_TITLE" IS '게시글 제목';
@@ -236,6 +237,7 @@ COMMENT ON COLUMN "BOARD"."BOARD_DEL_FL" IS '삭제 여부(N : 삭제X , Y : 삭
 COMMENT ON COLUMN "BOARD"."MEMBER_NO" IS '작성자 회원 번호';
 COMMENT ON COLUMN "BOARD"."BOARD_CODE" IS '게시판 코드';
 COMMENT ON COLUMN "BOARD"."BOARD_STATUS" IS '문의 답변여부';
+COMMENT ON COLUMN "BOARD"."PARENT_BOARD_NO" IS '부모 게시글 번호';
 
 -- BOARD: PK = BOARD_NO
 CREATE SEQUENCE SEQ_BOARD_NO
@@ -464,6 +466,7 @@ ALTER TABLE "CATEGORY" ADD CONSTRAINT "PK_CATEGORY" PRIMARY KEY ("CATEGORY_ID");
 -- 중위 테이블 PK
 ALTER TABLE "CHATTING_ROOM" ADD CONSTRAINT "PK_CHATTING_ROOM" PRIMARY KEY ("CHATTING_NO");
 ALTER TABLE "BOARD" ADD CONSTRAINT "PK_BOARD" PRIMARY KEY ("BOARD_NO");
+ALTER TABLE "BOARD" ADD CONSTRAINT "FK_BOARD_PARENT" FOREIGN KEY ("PARENT_BOARD_NO") REFERENCES "BOARD" ("BOARD_NO");
 
 -- 하위 테이블 PK
 ALTER TABLE "REQUEST" ADD CONSTRAINT "PK_REQUEST" PRIMARY KEY ("BOARD_NO");
@@ -529,7 +532,7 @@ COMMIT;
 
 -- 회원 정보 50명
 BEGIN
-    FOR i IN 1..50 LOOP
+    FOR i IN 1..200 LOOP
         INSERT INTO "MEMBER" (
             "MEMBER_EMAIL",
             "MEMBER_PW",
@@ -543,12 +546,13 @@ BEGIN
             '유저' || i,
             '010' || LPAD(i, 8, '0'),
             '서울 어디동 ' || i || '번지',
-            CASE TRUNC(DBMS_RANDOM.VALUE(1,6))
+            CASE TRUNC(DBMS_RANDOM.VALUE(1,7))
               WHEN 1 THEN '/resources/images/gif/monsterball.gif'
               WHEN 2 THEN '/resources/images/gif/noting.gif'
               WHEN 3 THEN '/resources/images/gif/Ogu.gif'
               WHEN 4 THEN '/resources/images/gif/Simpson.gif'
               WHEN 5 THEN '/resources/images/gif/sterdy.gif'
+              WHEN 6 THEN NULL
             END
         );
     END LOOP;
@@ -592,7 +596,7 @@ COMMIT;
 
 -- 더미 게시글 (공지사항, 자유게시판, 문의게시판, 신고게시판) 각 100건
 BEGIN
-    FOR i IN 1..100 LOOP
+    FOR i IN 1..500 LOOP
         INSERT INTO "BOARD"(
             "BOARD_TITLE",
             "BOARD_CONTENT",
@@ -608,7 +612,7 @@ BEGIN
         );
     END LOOP;
     
-    FOR i IN 1..100 LOOP
+    FOR i IN 1..500 LOOP
         INSERT INTO "BOARD"(
             "BOARD_TITLE",
             "BOARD_CONTENT",
@@ -623,8 +627,8 @@ BEGIN
             SYSDATE - (((100 - i)/100.0)*30)
         );
     END LOOP;
-    
-    FOR i IN 1..100 LOOP
+   
+    FOR i IN 1..500 LOOP
         INSERT INTO "BOARD"(
             "BOARD_TITLE",
             "BOARD_CONTENT",
@@ -644,6 +648,8 @@ BEGIN
     COMMIT;
 END;
 
+
+
 ---------------------------------------------------------------------------
 -- 의뢰 게시글 더미 데이터 (BOARD와 REQUEST 1:1 매핑, 의뢰게시판 BOARD_CODE=5)
 ---------------------------------------------------------------------------
@@ -653,7 +659,7 @@ DECLARE
     v_num_supporters  NUMBER;
     v_accept_index    NUMBER;
 BEGIN
-    FOR i IN 1..100 LOOP
+    FOR i IN 1..500 LOOP
         -- BOARD에 의뢰 게시글 등록 (BOARD_CODE=5: 의뢰게시판)
         INSERT INTO "BOARD" (
             "BOARD_TITLE",
@@ -665,7 +671,7 @@ BEGIN
             '의뢰게시판 제목 ' || i,
             '의뢰게시판 내용 ' || i,
             5,
-            TRUNC(DBMS_RANDOM.VALUE(1,51)),
+            TRUNC(DBMS_RANDOM.VALUE(1,101)),
             SYSDATE
         )
         RETURNING "BOARD_NO" INTO v_board_no;
@@ -712,7 +718,7 @@ BEGIN
                 ) VALUES (
                     NULL,  -- 트리거로 자동 증가 (시퀀스 등록됨)
                     CASE WHEN j = v_accept_index THEN 'Y' ELSE 'N' END,
-                    TRUNC(DBMS_RANDOM.VALUE(1,51)),
+                    TRUNC(DBMS_RANDOM.VALUE(1,101)),
                     v_board_no
                 );
             END LOOP;
@@ -731,10 +737,11 @@ BEGIN
     END LOOP;
     COMMIT;
 END;
+
 DECLARE
     v_report_board_no NUMBER;
 BEGIN
-    FOR i IN 1..50 LOOP
+    FOR i IN 1..100 LOOP
         -- 자유게시판(BOARD_CODE = 3)와 의뢰 게시글(REQUEST에 존재하는 BOARD_NO)의 합집합에서 무작위로 하나 선택
         SELECT board_no
         INTO v_report_board_no
@@ -759,7 +766,7 @@ BEGIN
             "REPORT_RESULT"
         ) VALUES (
             NULL,  -- 트리거/시퀀스를 통해 자동 증가
-            TRUNC(DBMS_RANDOM.VALUE(1,51)),  -- 1~50 사이의 임의 회원 번호
+            TRUNC(DBMS_RANDOM.VALUE(1,101)),  -- 1~50 사이의 임의 회원 번호
             v_report_board_no,
             '신고 내용 ' || i,
             '신고 제목 ' || i,
@@ -775,6 +782,50 @@ BEGIN
 END;
 
 
+-- 쓰레드용 더미 데이터
+DECLARE
+    v_parent_board_no NUMBER;
+BEGIN
+    -- 상위 게시글 20건 삽입 (PARENT_BOARD_NO = NULL)
+    FOR i IN 1..20 LOOP
+         INSERT INTO "BOARD" (
+              "BOARD_TITLE",
+              "BOARD_CONTENT",
+              "BOARD_CODE",
+              "MEMBER_NO",
+              "B_CREATE_DATE",
+              "PARENT_BOARD_NO"
+         ) VALUES (
+              '댓글게시판 상위 제목 ' || i,
+              '댓글게시판 상위 내용 ' || i,
+              4,  -- 댓글게시판
+              TRUNC(DBMS_RANDOM.VALUE(1,51)),
+              SYSDATE - (((20 - i)/20.0)*30),
+              NULL
+         )
+         RETURNING "BOARD_NO" INTO v_parent_board_no;
+         
+         -- 상위 게시글 당 2건의 답글 삽입 (PARENT_BOARD_NO = 상위 게시글 번호)
+         FOR j IN 1..2 LOOP
+             INSERT INTO "BOARD" (
+                  "BOARD_TITLE",
+                  "BOARD_CONTENT",
+                  "BOARD_CODE",
+                  "MEMBER_NO",
+                  "B_CREATE_DATE",
+                  "PARENT_BOARD_NO"
+             ) VALUES (
+                  '댓글게시판 답글 ' || i || '-' || j,
+                  '댓글게시판 답글 내용 ' || i || '-' || j,
+                  4,  -- 댓글게시판
+                  TRUNC(DBMS_RANDOM.VALUE(1,51)),
+                  SYSDATE - (((20 - i)/20.0)*30) + (j/1440),  -- j/1440는 j분 후 (1440 = 24*60)
+                  v_parent_board_no
+             );
+         END LOOP;
+    END LOOP;
+    COMMIT;
+END;
 
 
 ---------------------------------------------------------------------------
@@ -786,7 +837,7 @@ BEGIN
             INSERT INTO "BOARD_LIKE"("MEMBER_NO", "BOARD_NO")
             VALUES (
                 TRUNC(DBMS_RANDOM.VALUE(1,51)),
-                TRUNC(DBMS_RANDOM.VALUE(1,401))
+                TRUNC(DBMS_RANDOM.VALUE(501,1001))
             );
         EXCEPTION
             WHEN DUP_VAL_ON_INDEX THEN
@@ -796,11 +847,34 @@ BEGIN
     COMMIT;
 END;
 
-SELECT * FROM BOARD
-WHERE BOARD_CODE=6
-AND BOARD_STATUS='Y';
 
-SELECT COUNT(*) FROM BOARD 
-WHERE BOARD_CODE =6
-AND BOARD_DEL_FL ='N'
-AND BOARD_STATUS ='Y';
+      SELECT
+      BOARD_NO,BOARD_TITLE,BOARD_CONTENT , READ_COUNT
+      ,MEMBER_NICKNAME,MEMBER_NO ,
+      PROFILE_IMG,BOARD_CODE ,
+      TO_CHAR(B_CREATE_DATE,'YYYY"년" MM"월" DD"일" HH24:MI:SS') B_CREATE_DATE,
+      TO_CHAR(B_UPDATE_DATE,'YYYY"년" MM"월" DD"일" HH24:MI:SS') B_UPDATE_DATE,
+
+      (SELECT COUNT(*) FROM BOARD_LIKE L WHERE L.BOARD_NO = B.BOARD_NO)
+      LIKE_COUNT
+
+      FROM BOARD B
+      JOIN MEMBER USING(MEMBER_NO)
+      WHERE BOARD_DEL_FL
+      ='N'
+      AND BOARD_CODE =6
+      AND
+     BOARD_NO =1001;
+    
+    SELECT * FROM MEMBER;
+   	SELECT * FROM BOARD
+   WHERE BOARD_CODE =6
+  AND MEMBER_NO =3;
+  
+   
+ 		SELECT COUNT(*) FROM BOARD 
+		WHERE  BOARD_DEL_FL = 'N'
+		AND BOARD_CODE =6
+		AND MEMBER_NO=3;
+ 
+	

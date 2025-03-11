@@ -230,7 +230,14 @@
 					"@dbeaver-sid-service@": "SERVICE"
 				},
 				"auth-model": "oracle_native"
-			}
+			},
+			"filters": [
+				{
+					"type": "org.jkiss.dbeaver.ext.oracle.model.OracleSchema",
+					"enabled": true,
+					"include": ["HAEZO"]
+				}
+			]
 		},
 		"oracle_thin-1957d9976d1-105a4a612595a8a9": {
 			"provider": "oracle",
