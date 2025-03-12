@@ -22,7 +22,21 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO haezo;
 ALTER USER haezo DEFAULT TABLESPACE SYSTEM
 QUOTA UNLIMITED ON SYSTEM;
 
+ALTER USER HAEZO IDENTIFIED BY "vhRfk5Tv4XMN3At"; -- 비밀번호 변경
 ------------------------------------------------------------
+--여긴 클라우드 DB
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
+
+-- 계정 생성
+CREATE USER HAEZO IDENTIFIED BY "vhRfk5Tv4XMN3At";
+
+-- 권한 부여
+GRANT CONNECT, RESOURCE, CREATE VIEW TO haezo;
+
+-- 객체 생성 공간 할당
+ALTER USER haezo DEFAULT TABLESPACE SYSTEM
+QUOTA UNLIMITED ON SYSTEM;
+--------------------------------
 
 DROP TABLE "MEMBER";
 
