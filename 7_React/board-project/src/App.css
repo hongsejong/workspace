@@ -222,3 +222,28 @@ nav a:hover{
   color: white;
 }
 
+/* 에러페이지 */
+.error-page{
+  display: flex;
+  height: 800px;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+  
+}
+
+#cont{
+  border:  1px solid gray;
+  margin-top: 100px;
+  height: 450px;
+}
+#dTitle{
+  font-size: 30px;
+  border-bottom: 1px solid gray;
+  padding: 30px;
+}
+#con2{
+  border-bottom: 1px solid gray;
+}
