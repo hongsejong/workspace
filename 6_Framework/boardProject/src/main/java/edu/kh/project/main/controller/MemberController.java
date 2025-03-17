@@ -116,7 +116,7 @@ public class MemberController {
 	 */
 	@PostMapping("/login")
 	public String login(Member inputMember, Model model
-			,@RequestHeader(value="referer") String referer
+			,@RequestHeader(value="referer", required=false) String referer
 			,@RequestParam(value="saveId", required=false) String saveId
 			,HttpServletResponse resp
 			,RedirectAttributes ra) {
@@ -247,6 +247,7 @@ public class MemberController {
 		}
 
 		return path;
+		//return "common/main"; junit테스트용
 	}
 	
 	
