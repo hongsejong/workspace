@@ -3,8 +3,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // 알림
-    connectSse(); // SSE 연결
-    notReadCheck(); // 알림 개수 조회
+    // connectSse(); // SSE 연결
+    // notReadCheck(); // 알림 개수 조회
 
     // 종 버튼(알림) 클릭 시 알림 목록 출력하기
     const notificationBtn = document.getElementById("my-element");
@@ -206,82 +206,82 @@ document.addEventListener("click", e => {
 -> 연결을 요청한 클라이언트가 서버로부터 데이터가 전달될 때 까지 대기 상태(비동기)
 */
 
-const connectSse = () => {
-    //로그인이 되어있지 않은 경우 함수 종료
-    if(!notificationLoginCheck) return;
+// const connectSse = () => {
+//     //로그인이 되어있지 않은 경우 함수 종료
+//     if(!notificationLoginCheck) return;
 
-    console.log("connectSse() 호출");
+//     console.log("connectSse() 호출");
 
-    //서버의 "/sse/connect" 주소로 연결 요청
-    const eventSource = new EventSource("/sse/connect");
+//     //서버의 "/sse/connect" 주소로 연결 요청
+//     const eventSource = new EventSource("/sse/connect");
 
-    //----------------------------------
+//     //----------------------------------
 
-    //서버로 부터 메세지가 왔을 경우(전달 받은 경우)
+//     //서버로 부터 메세지가 왔을 경우(전달 받은 경우)
 
-    eventSource.addEventListener("message",e=>{
-        //console.log(e.data); // e.data == 전달 받은 메세지
-                             // -> Spring HttpMessageConverter가 JSON으로 변환해서 응답해줌
+//     eventSource.addEventListener("message",e=>{
+//         //console.log(e.data); // e.data == 전달 받은 메세지
+//                              // -> Spring HttpMessageConverter가 JSON으로 변환해서 응답해줌
 
-        const obj = JSON.parse(e.data);
-        //console.log(obj) //알림 받는 회원 번호, 읽지 않은 알림 개수
-                            //채팅 알림인 경우 채팅방번호, 알림번호 추가로 얻어옴
+//         const obj = JSON.parse(e.data);
+//         //console.log(obj) //알림 받는 회원 번호, 읽지 않은 알림 개수
+//                             //채팅 알림인 경우 채팅방번호, 알림번호 추가로 얻어옴
 
-        // 채팅 알림을 받았는데 해당 채팅방에 입장한 상태인 경우 알림 X
-        try{
+//         // 채팅 알림을 받았는데 해당 채팅방에 입장한 상태인 경우 알림 X
+//         try{
 
-            if(selectChattingNo==obj.chattingRoomNo){
-                fetch("/notification", {
-                    method: "DELETE",
-                    headers: { "Content-Type": "application/json" },
-                    body: obj.notificationNo
-                  })
-                  .then(resp => {
-                    if(!resp.ok) throw new Error("채팅 알림 삭제 실패");
-                  })
-                  .catch(err => console.log(err));
+//             if(selectChattingNo==obj.chattingRoomNo){
+//                 fetch("/notification", {
+//                     method: "DELETE",
+//                     headers: { "Content-Type": "application/json" },
+//                     body: obj.notificationNo
+//                   })
+//                   .then(resp => {
+//                     if(!resp.ok) throw new Error("채팅 알림 삭제 실패");
+//                   })
+//                   .catch(err => console.log(err));
     
-                  return;
+//                   return;
     
-            }
-        }catch(e){}
+//             }
+//         }catch(e){}
 
 
-        //종 버튼에 색 추가
-        const notificationBtn = document.getElementById('my-element');
-        notificationBtn.classList.add("fa-solid");
-        notificationBtn.classList.remove("fa-regular");
+//         //종 버튼에 색 추가
+//         const notificationBtn = document.getElementById('my-element');
+//         notificationBtn.classList.add("fa-solid");
+//         notificationBtn.classList.remove("fa-regular");
 
-        //알림 개수 표시
-        const notificationCountArea = document.querySelector(".notification-count-area");
-        notificationCountArea.innerText = obj.notiCount;
+//         //알림 개수 표시
+//         const notificationCountArea = document.querySelector(".notification-count-area");
+//         notificationCountArea.innerText = obj.notiCount;
 
-        //알림 목록이 열려 있는 경우
-        //알림 목록 비동기 조회
-        const notificationList =document.querySelector('.notification-list');
-        if(notificationList.classList.contains("notification-show")){
-            selectNotificationList();
-        }
+//         //알림 목록이 열려 있는 경우
+//         //알림 목록 비동기 조회
+//         const notificationList =document.querySelector('.notification-list');
+//         if(notificationList.classList.contains("notification-show")){
+//             selectNotificationList();
+//         }
 
-    })
+//     })
 
     //----------------------------------------
 
 
     //서버 연결이 종료된 경우(타임아웃 초과)
-    eventSource.addEventListener("error",()=>{
-        console.log("SSE 재연결 시도");
+//     eventSource.addEventListener("error",()=>{
+//         console.log("SSE 재연결 시도");
 
-        eventSource.close(); // 기존 연결 닫기
+//         eventSource.close(); // 기존 연결 닫기
 
-        // 5초 후 재연결 시도
-        setTimeout(()=>connectSse(),5000);
-    })
+//         // 5초 후 재연결 시도
+//         setTimeout(()=>connectSse(),5000);
+//     })
 
 
 
    
-}
+// }
 
 
     /* 알림 메세지 전송 함수 

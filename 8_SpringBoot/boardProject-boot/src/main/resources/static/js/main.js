@@ -58,24 +58,24 @@ const inputNickname=document.getElementById("inputNickname")
 const btn1=document.getElementById("btn1")
 const result1=document.getElementById("result1")
 
-btn1.addEventListener("click",()=>{
+// btn1.addEventListener("click",()=>{
 
-    // fetch() API 를 이용한 ajax(비동기 통신)
+//     // fetch() API 를 이용한 ajax(비동기 통신)
 
-    fetch("/selectTel?nickname=" + inputNickname.value) 
-    .then(response => response.text()) 
-    // response :응답 객체
-    // response.text() : 응답 객체 내용을 문자열로 변환하여 반환
-    .then(tel=> {
-        //tel : 파싱되어 반환된 값이 저장된 변수
+//     fetch("/selectTel?nickname=" + inputNickname.value) 
+//     .then(response => response.text()) 
+//     // response :응답 객체
+//     // response.text() : 응답 객체 내용을 문자열로 변환하여 반환
+//     .then(tel=> {
+//         //tel : 파싱되어 반환된 값이 저장된 변수
         
-        //비동기 요청 후 수행할 코드
-        result1.innerHTML=tel  // 조회 결과를 result1에 출력
-    })
-    .catch( err => {console.log(err)}) 
+//         //비동기 요청 후 수행할 코드
+//         result1.innerHTML=tel  // 조회 결과를 result1에 출력
+//     })
+//     .catch( err => {console.log(err)}) 
 
-    // Get 방식 요청(파라미터를 쿼리스트링에 추가)
-})
+//     // Get 방식 요청(파라미터를 쿼리스트링에 추가)
+// })
 
 
 
@@ -88,47 +88,47 @@ const inputEmail2=document.getElementById("inputEmail2")
 const btn2=document.getElementById("btn2")
 const result2=document.getElementById("result2")
 
-btn2.addEventListener("click",()=>{
-    // POST 방식 비동기 요청
+// btn2.addEventListener("click",()=>{
+//     // POST 방식 비동기 요청
 
-    //JSON.stringify() : JS 객체 -> JSON
-    //JSON.parse()     : JSON -> JS 객체
+//     //JSON.stringify() : JS 객체 -> JSON
+//     //JSON.parse()     : JSON -> JS 객체
 
-    fetch("/selectMember",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify({"email" : inputEmail2.value})
-    })
-    .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
-    .then(member => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작 코드 작성
-        console.log(member);
+//     fetch("/selectMember",{
+//         method : "POST",
+//         headers : {"Content-Type" : "application/json"},
+//         body : JSON.stringify({"email" : inputEmail2.value})
+//     })
+//     .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
+//     .then(member => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작 코드 작성
+//         console.log(member);
 
 
-        //ul 내부 내용 모두 없애기
-        result2.innerText="";
+//         //ul 내부 내용 모두 없애기
+//         result2.innerText="";
 
-        const li1 = document.createElement("li");
-        li1.innerText = `회원번호 : ${member.memberNo}`;  
-        const li2 = document.createElement("li");
-        li2.innerText = `이메일 : ${member.memberEmail}`;  
-        const li3 = document.createElement("li");
-        li3.innerText = `닉네임 : ${member.memberNickname}`;  
-        const li4 = document.createElement("li");
-        li4.innerText = `전화번호 : ${member.memberTel}`;  
-        const li5 = document.createElement("li");
-        li5.innerText = `주소 : ${member.memberAddress}`;  
-        const li6 = document.createElement("li");
-        li6.innerText = `가입일 : ${member.enrollDate}`;  
+//         const li1 = document.createElement("li");
+//         li1.innerText = `회원번호 : ${member.memberNo}`;  
+//         const li2 = document.createElement("li");
+//         li2.innerText = `이메일 : ${member.memberEmail}`;  
+//         const li3 = document.createElement("li");
+//         li3.innerText = `닉네임 : ${member.memberNickname}`;  
+//         const li4 = document.createElement("li");
+//         li4.innerText = `전화번호 : ${member.memberTel}`;  
+//         const li5 = document.createElement("li");
+//         li5.innerText = `주소 : ${member.memberAddress}`;  
+//         const li6 = document.createElement("li");
+//         li6.innerText = `가입일 : ${member.enrollDate}`;  
 
-        result2.append(li1,li2,li3,li4,li5,li6)
+//         result2.append(li1,li2,li3,li4,li5,li6)
  
 
-    })
-    .catch(err => {console.log(err);
-        result2.innerText="일치하는 회원이 없습니다.";
+//     })
+//     .catch(err => {console.log(err);
+//         result2.innerText="일치하는 회원이 없습니다.";
       
-    });
-})
+//     });
+// })
 
 
 
@@ -138,43 +138,43 @@ const btn3=document.getElementById("btn3")
 const input=document.getElementById("input")
 const result3=document.getElementById("result3");
 
-btn3.addEventListener("click",function(){
+// btn3.addEventListener("click",function(){
 
-    fetch("/selectMemberList",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify({"input" : input.value})
-    })
-    .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
-    .then(member => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작 코드 작성
-        console.log(member);
-        result3.innerHTML="";
+//     fetch("/selectMemberList",{
+//         method : "POST",
+//         headers : {"Content-Type" : "application/json"},
+//         body : JSON.stringify({"input" : input.value})
+//     })
+//     .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
+//     .then(member => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작 코드 작성
+//         console.log(member);
+//         result3.innerHTML="";
 
-        //일치하는 회원이 없는 경우
-        if(member.length==0){
-            result3.innerHTML="일치하는 회원 없음"
-            return;
-        }
+//         //일치하는 회원이 없는 경우
+//         if(member.length==0){
+//             result3.innerHTML="일치하는 회원 없음"
+//             return;
+//         }
 
-        //일치하는 회원이 있을 경우
-        for(let i=0; i<member.length; i++){
-            const tr=document.createElement("tr");
-            const td1= document.createElement("td");
-            const td2= document.createElement("td");
-            const td3= document.createElement("td");
-            td1.innerText=member[i].memberNo;
-            td2.innerText=member[i].memberEmail;
-            td3.innerText=member[i].memberNickname;
-            tr.append(td1,td2,td3)
-            result3.append(tr);
-        }
+//         //일치하는 회원이 있을 경우
+//         for(let i=0; i<member.length; i++){
+//             const tr=document.createElement("tr");
+//             const td1= document.createElement("td");
+//             const td2= document.createElement("td");
+//             const td3= document.createElement("td");
+//             td1.innerText=member[i].memberNo;
+//             td2.innerText=member[i].memberEmail;
+//             td3.innerText=member[i].memberNickname;
+//             tr.append(td1,td2,td3)
+//             result3.append(tr);
+//         }
 
         
 
-    })
-    .catch(err => {console.log(err)});
+//     })
+//     .catch(err => {console.log(err)});
     
-});
+// });
 
 //--------------------------------------------
 // 웹소켓 테스트
@@ -183,30 +183,62 @@ btn3.addEventListener("click",function(){
 
 // 2. SockJS를 이용해서 클라이언트용 웹소켓 객체 생성
 
-let testSock = new SockJS("/testSock/");
+// let testSock = new SockJS("/testSock/");
 
-function sendMessage(name, str){
+// function sendMessage(name, str){
 
-    // 매개변수를 JS 객체에 저장
-    let obj = {}; // 비어있는 객체
+//     // 매개변수를 JS 객체에 저장
+//     let obj = {}; // 비어있는 객체
 
-    obj.name = name; // 객체에 일치하는 key가 없다면 자동으로 추가
-    obj.str = str;
+//     obj.name = name; // 객체에 일치하는 key가 없다면 자동으로 추가
+//     obj.str = str;
 
-    //console.log(obj)
+//     //console.log(obj)
 
-    //웹소켓이 연결된 곳으로 메세지를 보냄
-    testSock.send( JSON.stringify(obj) );
-                    //JS객체 -> JSON
+//     //웹소켓이 연결된 곳으로 메세지를 보냄
+//     testSock.send( JSON.stringify(obj) );
+//                     //JS객체 -> JSON
 
+// }
+
+// //웹 소켓 객체(testSock)가 서버로 부터 전달받은 메세지가 있을 경우
+// testSock.onmessage = e =>{
+//     // e : 이벤트 객체
+//     // e.data : 전달 받은 메세지(JSON)
+
+//     let obj = JSON.parse(e.data); // JSON -> JS 객체
+
+//     console.log(`보낸사람 : ${obj.name} / 내용 : ${obj.str}`);
+// }
+
+// 자바스크립트로 쿠키 얻어오기
+function getCookie(key){
+    const cookies = document.cookie;
+
+    // 배열.map() : 배열의 모든 요소에 접근하여 함수 수행 후
+    //              수행 결과를 이용해서 새로운 배열을 만드는 함수
+    const cookieList = cookies.split("; ").map(cookie => cookie.split("="));
+
+    const obj ={}; //비어있는 객체 생성
+
+    for(let i=0; i<cookieList.length; i++){
+        obj[cookieList[i][0]] = cookieList[i][1];
+    }
+    return obj[key];
 }
 
-//웹 소켓 객체(testSock)가 서버로 부터 전달받은 메세지가 있을 경우
-testSock.onmessage = e =>{
-    // e : 이벤트 객체
-    // e.data : 전달 받은 메세지(JSON)
+//쿠키에 saveId가 있을 경우
 
-    let obj = JSON.parse(e.data); // JSON -> JS 객체
+if(document.getElementsByName("memberEmail")[0] !=null){ 
+    // 화면에 memberEmail 입력이 있을 경우
 
-    console.log(`보낸사람 : ${obj.name} / 내용 : ${obj.str}`);
+    const saveId = getCookie("saveId");
+    // 있으면 이메일, 없는 경우 undefined
+
+    if(saveId != undefined){ //쿠키에 저장된 email이 있는 경우
+        memberEmail.value=saveId
+        document.getElementsByName("saveId")[0].checked=true;
+
+
+    }
 }
